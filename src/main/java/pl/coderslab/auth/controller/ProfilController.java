@@ -18,7 +18,7 @@ public class ProfilController {
     public String showUserProfilePage(Model model) {
         String username = UserUtilities.getLoggedUser();
         User user = userService.findByUsername(username);
-        model.addAttribute("user", user)
+        model.addAttribute("user", user);
         return "profil";
     }
 }
