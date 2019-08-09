@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.promotion.Promotion;
-import pl.coderslab.promotion.PromotionDao;
 import pl.coderslab.promotion.PromotionRepository;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -20,14 +21,32 @@ public class SearchController {
 
 
     @Autowired
-    public SearchController(PromotionRepository promotionRepository, PromotionDao promotionDao) {
+    public SearchController(PromotionRepository promotionRepository) {
         this.promotionRepository = promotionRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String search(Model model) {
         List<Promotion> list = promotionRepository.findAll();
         model.addAttribute("list", list);
         return "search";
     }
+
+    @GetMapping("/today")
+    public String searchByToday(Model model) {
+        LocalDate date = LocalDate.now();
+        DayOfWeek dow = date.getDayOfWeek();
+        List<Promotion> list = promotionRepository.findAllByDayOfWeek(dow);
+        model.addAttribute("list", list);
+        return "search";
+    }
+
+    @GetMapping("/day/{day}")
+    public String searchByDayOfWeek(@PathVariable DayOfWeek day, Model model) {
+        List<Promotion> list = promotionRepository.findAllByDayOfWeek(day);
+        model.addAttribute("list", list);
+        return "search";
+    }
+
+
 }

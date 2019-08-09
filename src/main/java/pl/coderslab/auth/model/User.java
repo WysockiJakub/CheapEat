@@ -1,5 +1,6 @@
 package pl.coderslab.auth.model;
 
+import org.springframework.lang.Nullable;
 import pl.coderslab.promotion.Promotion;
 
 import javax.persistence.*;
@@ -18,19 +19,20 @@ public class User {
 
     private String password;
 
+    @Nullable
     private String email;
-
+    @Nullable
     private String address;
-
-
+    @Nullable
+    private String dateOfBirth;
 
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
     private List<Promotion> favouritesPromotions = new ArrayList<>();
 
     public Long getId() {
@@ -79,5 +81,32 @@ public class User {
 
     public void setFavouritesPromotions(List<Promotion> favouritesPromotions) {
         this.favouritesPromotions = favouritesPromotions;
+    }
+
+    @Nullable
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@Nullable String email) {
+        this.email = email;
+    }
+
+    @Nullable
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(@Nullable String address) {
+        this.address = address;
+    }
+
+    @Nullable
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(@Nullable String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

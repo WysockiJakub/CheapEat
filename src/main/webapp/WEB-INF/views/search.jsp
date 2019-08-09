@@ -14,6 +14,38 @@
 </head>
 <body>
 <%@ include file="../fragments/header.jsp" %>
+<table>
+<tr>
+    <td>
+        <a href="/search">Wszystkie</a>
+    </td>
+    <td>
+        <a href="/search/today">Dzisiaj</a>
+    </td>
+    <td>
+        <a href="/search/day/1">Poniedzialek</a>
+    </td>
+    <td>
+        <a href="/search/day/2">Wtorek</a>
+    </td>
+    <td>
+        <a href="/search/day/3">Środa</a>
+    </td>
+    <td>
+        <a href="/search/day/4">Czwartek</a>
+    </td>
+    <td>
+        <a href="/search/day/5">Piątek</a>
+    </td>
+    <td>
+        <a href="/search/day/6">Sobota</a>
+    </td>
+    <td>
+        <a href="/search/day/7">Niedziela</a>
+    </td>
+
+</tr>
+</table>
 <table class="table table-striped">
     <thead>
     <tr>

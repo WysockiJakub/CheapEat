@@ -6,8 +6,8 @@ import pl.coderslab.review.Review;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "promotion")
@@ -25,7 +25,11 @@ public class Promotion {
     @ManyToOne(fetch = FetchType.EAGER)
     private Restaurant restaurant;
 
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
 
+    @OneToMany
+    private List<Review> reviews = new ArrayList<>();
 
     public Promotion() {
     }
@@ -80,5 +84,18 @@ public class Promotion {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Promotion{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", dayOfWeek=" + dayOfWeek +
+                ", restaurant=" + restaurant +
+                ", users=" + users +
+                '}';
     }
 }

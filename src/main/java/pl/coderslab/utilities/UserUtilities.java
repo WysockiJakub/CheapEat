@@ -15,4 +15,15 @@ public class UserUtilities {
         }
         return username;
     }
+
+    public static String getLoggedUserId() {
+        String username = null;
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            username = auth.getName();
+
+        }
+        return username;
+    }
 }

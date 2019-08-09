@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface PromotionRepository extends JpaRepository<Promotion, Long> {
     List<Promotion> findAll();
-    List<Promotion> findByDayOfWeek(DayOfWeek dayOfWeek);
+    List<Promotion> findAllByDayOfWeek(DayOfWeek dayOfWeek);
+    Promotion getFirstById(Long id);
+
 }

@@ -1,4 +1,4 @@
-package pl.coderslab.auth.controller;
+package pl.coderslab;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,17 +10,21 @@ import pl.coderslab.auth.service.UserService;
 import pl.coderslab.utilities.UserUtilities;
 
 @Controller
-@RequestMapping("/profil")
-public class ProfilController {
+@RequestMapping("/test")
+public class TestController {
 
-    @Autowired
     private UserService userService;
 
-    @GetMapping("")
-    public String showUserProfilePage(Model model) {
+    @Autowired
+    public TestController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/")
+    public String test(Model model) {
         String username = UserUtilities.getLoggedUser();
         User user = userService.findByUsername(username);
         model.addAttribute("user", user);
-        return "profil";
+        return "dashboard2";
     }
 }

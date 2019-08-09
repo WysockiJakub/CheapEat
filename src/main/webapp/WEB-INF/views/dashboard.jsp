@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>CheapEat</title>
     <%@ include file="../fragments/head.jsp" %>
 </head>
 <body>
