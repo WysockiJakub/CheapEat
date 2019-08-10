@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.auth.model.User;
+import pl.coderslab.auth.repository.UserRepository;
 import pl.coderslab.auth.service.UserService;
 import pl.coderslab.utilities.UserUtilities;
 
@@ -13,13 +14,18 @@ import pl.coderslab.utilities.UserUtilities;
 @RequestMapping("/profil")
 public class ProfilController {
 
-    @Autowired
     private UserService userService;
+    private UserRepository userRepository;
+
+    @Autowired
+    public ProfilController(UserService userService, UserRepository userRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("")
     public String showUserProfilePage(Model model) {
-        String username = UserUtilities.getLoggedUser();
-        User user = userService.findByUsername(username);
+        User user = UserUtilities.getLoggedUser(userRepository);
         model.addAttribute("user", user);
         return "profil";
     }

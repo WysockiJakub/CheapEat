@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -30,5 +32,11 @@ public class RestaurantDao {
         if (restaurant != null) {
             entityManager.remove(restaurant);
         }
+    }
+
+    public List<Restaurant> findAll() {
+        Query query = entityManager.createQuery("select r from Restaurant r");
+        List restaurants = query.getResultList();
+        return restaurants;
     }
 }

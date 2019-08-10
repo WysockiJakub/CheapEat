@@ -21,11 +21,11 @@
     </tr>
     <tr>
         <td>Email:</td>
-        <td>${user.username}</td>
+        <td>${user.email}</td>
     </tr>
     <tr>
-        <td>Nazwa użytkownika:</td>
-        <td>${user.username}</td>
+        <td>Adres:</td>
+        <td>${user.address}</td>
     </tr>
 </table>
 

@@ -1,10 +1,14 @@
 package pl.coderslab.promotion;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.review.Review;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,29 +21,39 @@ public class Promotion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(max = 150)
     private String name;
+
+    @NotBlank
+    @Size(max = 500)
     private String description;
+
     private double price;
+
+    @NotBlank
     private DayOfWeek dayOfWeek;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Restaurant restaurant;
 
-    @ManyToMany
-    private List<User> users = new ArrayList<>();
+//    @ManyToMany
+//    private List<User> users = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     private List<Review> reviews = new ArrayList<>();
 
     public Promotion() {
     }
 
-    public Promotion(String name, String description, double price, DayOfWeek dayOfWeek, Restaurant restaurant) {
+    public Promotion(String name, String description, double price, DayOfWeek dayOfWeek, Restaurant restaurant, List<User> users, List<Review> reviews) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.dayOfWeek = dayOfWeek;
         this.restaurant = restaurant;
+//        this.users = users;
+        this.reviews = reviews;
     }
 
     public String getName() {
@@ -86,6 +100,30 @@ public class Promotion {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void addToReviews(Review review) {
+        reviews.add(review);
+    }
+
     @Override
     public String toString() {
         return "Promotion{" +
@@ -94,8 +132,7 @@ public class Promotion {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", dayOfWeek=" + dayOfWeek +
-                ", restaurant=" + restaurant +
-                ", users=" + users +
+                ", restaurant=" + restaurant+
                 '}';
     }
 }

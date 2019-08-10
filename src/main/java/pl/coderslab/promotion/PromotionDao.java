@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.auth.repository.UserRepository;
+import pl.coderslab.utilities.UserUtilities;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,13 +44,8 @@ public class PromotionDao {
         }
     }
 
-    public void addToFavourite(Long userId, Promotion promotion){
-        User user = userRepository.getOne(userId);
-        List<Promotion> favouritePromotions = user.getFavouritesPromotions();
-        favouritePromotions.add(promotion);
-        entityManager.getTransaction().begin();
+    public void addToFavourite(List<Promotion> favouritePromotions, Long userId) {
         userRepository.updateFavouritePromotions(favouritePromotions, userId);
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
+
 }

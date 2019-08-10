@@ -2,6 +2,7 @@ package pl.coderslab.auth.model;
 
 import org.springframework.lang.Nullable;
 import pl.coderslab.promotion.Promotion;
+import pl.coderslab.review.Review;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -32,8 +34,11 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Promotion> favouritesPromotions = new ArrayList<>();
+
+    @OneToMany
+    private List<Review> reviews = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -108,5 +113,9 @@ public class User {
 
     public void setDateOfBirth(@Nullable String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void addFavouritePromotion(Promotion promotion) {
+        favouritesPromotions.add(promotion);
     }
 }

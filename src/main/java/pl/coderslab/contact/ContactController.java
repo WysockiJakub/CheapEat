@@ -1,5 +1,6 @@
 package pl.coderslab.contact;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,11 +15,12 @@ import pl.coderslab.utilities.UserUtilities;
 @RequestMapping("/contact")
 public class ContactController {
 
-    private ContactDao contactDao;
+    private ContactRepository contactRepository;
     private UserRepository userRepository;
 
-    public ContactController(pl.coderslab.contact.ContactDao contactDao, UserRepository userRepository) {
-        this.contactDao = contactDao;
+    @Autowired
+    public ContactController(ContactRepository contactRepository, UserRepository userRepository) {
+        this.contactRepository = contactRepository;
         this.userRepository = userRepository;
     }
 
@@ -34,10 +36,10 @@ public class ContactController {
         if (result.hasErrors()) {
             return "contact";
         }
-        contactMessage.setUsername(UserUtilities.getLoggedUser());
-        String email = userRepository.findByUsername(UserUtilities.getLoggedUser()).getEmail();
+        contactMessage.setUsername(UserUtilities.getLoggedUser(userRepository).getUsername());
+        String email = UserUtilities.getLoggedUser(userRepository).getEmail();
         contactMessage.setUserEmail(email);
-        contactDao.save(contactMessage);
+        contactRepository.save(contactMessage);
         model.addAttribute("sended", "Dziekujemy za kontakt. Wiadomośc została wysłana");
         return"contact";
     }

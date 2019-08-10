@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/dashboard">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,7 +13,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/profil">Profil</a>
-                    <a class="dropdown-item" href="#">Zaproponuj</a>
+                    <a class="dropdown-item" href="#">Moje promocje</a>
+                    <a class="dropdown-item" href="#">Ulubione promocje</a>
                     <div class="dropdown-divider"></div>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                     <form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -32,7 +33,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/search">Wyszukaj</a>
-                    <a class="dropdown-item" href="#">Ulubione</a>
+                    <a class="dropdown-item" href="/promotion/add">Dodaj promocję</a>
                     <a class="dropdown-item" href="#">Zaproponuj</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
@@ -45,7 +46,7 @@
                 <a class="nav-link" href="/contact">Kontakt<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/test/">Test<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/test">Test<span class="sr-only">(current)</span></a>
             </li>
             <%--                <li class="nav-item">--%>
             <%--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--%>

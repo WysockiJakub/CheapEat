@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: jakub
@@ -36,6 +37,30 @@
         </tr>
     </table>
 </div>
+<div>
+    <form:form method="post" modelAttribute="review">
+        <label for="reviewId">Review:</label>
+        <form:input type="textarea" path="content" id="reviewId" rows="3" cols="20"/>
+        <form:errors path="content" element="div"/>
+
+        <br/><br/>
+
+        <input type="submit" value="Add Review">
+    </form:form>
+</div>
+<c:forEach var="promotion" items="${list}">
+    <tr>
+        <td>${promotion.name}</td>
+        <td>${promotion.description}</td>
+        <td>${promotion.price}</td>
+        <td>${promotion.dayOfWeek}</td>
+        <td>${promotion.restaurant.name}</td>
+        <td>
+            <a href="/promotion/${promotion.id}">Zobacz</a>
+        </td>
+    </tr>
+</c:forEach>
+
 <%@ include file="../fragments/jsCode.jsp" %>
 </body>
 </html>

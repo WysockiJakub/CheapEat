@@ -42,8 +42,9 @@ public class SearchController {
     }
 
     @GetMapping("/day/{day}")
-    public String searchByDayOfWeek(@PathVariable DayOfWeek day, Model model) {
-        List<Promotion> list = promotionRepository.findAllByDayOfWeek(day);
+    public String searchByDayOfWeek(@PathVariable int day, Model model) {
+        DayOfWeek dayOfWeek = DayOfWeek.of(day);
+        List<Promotion> list = promotionRepository.findAllByDayOfWeek(dayOfWeek);
         model.addAttribute("list", list);
         return "search";
     }
