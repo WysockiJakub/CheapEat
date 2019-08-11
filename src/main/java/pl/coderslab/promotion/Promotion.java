@@ -1,8 +1,6 @@
 package pl.coderslab.promotion;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.review.Review;
@@ -12,10 +10,13 @@ import javax.validation.constraints.Size;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "promotion")
 public class Promotion {
+
+    //---------------ZMIENNE------------------
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,14 @@ public class Promotion {
     @Size(max = 500)
     private String description;
 
+    @NotBlank
+    private String category;
+
+    @NotBlank
     private double price;
+
+    @Transient
+    private double averageNote;
 
     @NotBlank
     private DayOfWeek dayOfWeek;
@@ -37,11 +45,10 @@ public class Promotion {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Restaurant restaurant;
 
-//    @ManyToMany
-//    private List<User> users = new ArrayList<>();
-
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     private List<Review> reviews = new ArrayList<>();
+
+    //----------------METODY----------------------
 
     public Promotion() {
     }
@@ -52,8 +59,25 @@ public class Promotion {
         this.price = price;
         this.dayOfWeek = dayOfWeek;
         this.restaurant = restaurant;
-//        this.users = users;
         this.reviews = reviews;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Promotion promotion = (Promotion) o;
+        return this.getId() == promotion.getId();
+    }
+
+    public void addToReviews(Review review) {
+        reviews.add(review);
+    }
+
+
+    //------------GETTERY I SETTERY----------------
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public String getName() {
@@ -104,14 +128,6 @@ public class Promotion {
         this.id = id;
     }
 
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
-
     public List<Review> getReviews() {
         return reviews;
     }
@@ -120,8 +136,20 @@ public class Promotion {
         this.reviews = reviews;
     }
 
-    public void addToReviews(Review review) {
-        reviews.add(review);
+    public double getAverageNote() {
+        return averageNote;
+    }
+
+    public void setAverageNote(double averageNote) {
+        this.averageNote = averageNote;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override

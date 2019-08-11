@@ -37,8 +37,8 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Promotion> favouritesPromotions = new ArrayList<>();
 
-    @OneToMany
-    private List<Review> reviews = new ArrayList<>();
+//    @OneToMany
+//    private List<Review> reviews = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -118,4 +118,6 @@ public class User {
     public void addFavouritePromotion(Promotion promotion) {
         favouritesPromotions.add(promotion);
     }
+
+    public void deleteFavouritePromotion(Promotion promotion) { favouritesPromotions.remove(promotion); }
 }

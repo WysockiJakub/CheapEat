@@ -15,4 +15,7 @@ public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 
     @Query("update Promotion p set p.reviews = ?1 where p.id = ?2")
     void setNewReviewsList(List<Review> reviews, Long id);
+
+    @Query(value = "select avg (note) from promotion p join promotion_reviews pr on p.id = pr.promotion_id join reviews r on pr.reviews_id = r.id where p.id = :promotionId", nativeQuery = true)
+    double getAverageNoteByPromotionId(@Param("promotionId") Long promotionId);
 }

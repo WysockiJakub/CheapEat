@@ -19,13 +19,13 @@ public class Review {
 
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
     public Review() {
     }
 
-    public Review(Integer note, String content, Promotion promotion, User user) {
+    public Review(Integer note, String content, User user) {
         this.note = note;
         this.content = content;
         this.user = user;

@@ -13,3 +13,5 @@ insert into promotion (name, description, price, dayOfWeek, restaurant_id) value
 insert into promotion (name, description, price, dayOfWeek, restaurant_id) values ("Mule", "desc", 39.90, 4, 3);
 insert into promotion (name, description, price, dayOfWeek, restaurant_id) values ("Dwie porcje SKRZYDELEK BBQ", "desc", 25.00, 4, 5);
 insert into promotion (name, description, price, dayOfWeek, restaurant_id) values ("Schabowy", "desc", 15.00, 1, 5);
+
+insert into users (address, dateOfBirth, email, password, username) values ("Warszawa","01-02-2000", "test@test.pl", "$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "kubakuba");

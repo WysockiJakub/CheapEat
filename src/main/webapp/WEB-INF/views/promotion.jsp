@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jakub
@@ -23,6 +24,7 @@
         <th>Cena</th>
         <th>Dzień promocji</th>
         <th>Restauracja</th>
+        <th>Ocena</th>
     </tr>
         <tr>
             <td>${promotion.name}</td>
@@ -30,37 +32,45 @@
             <td>${promotion.price}</td>
             <td>${promotion.dayOfWeek}</td>
             <td>${promotion.restaurant.name}</td>
+            <td>${promotion.averageNote}</td>
             <td>
-                <a href="#" onclick="confirmDelete(${author.id}, '${author.fullName}')">Delete</a>
-                <a href="addToFavourite/${promotion.id}">Dodaj do ulubionych</a>
+                <c:choose>
+                    <c:when test="${!favourite}">
+                        <a href="/promotion/addToFavourite/${promotion.id}">Dodaj do ulubionych</a>
+                    </c:when>
+                    <C:otherwise>
+                        <a href="/promotion/deleteFromFavourite/${promotion.id}">Usuń z ulubionych</a>
+                    </C:otherwise>
+                </c:choose>
             </td>
         </tr>
     </table>
 </div>
-<div>
-    <form:form method="post" modelAttribute="review">
-        <label for="reviewId">Review:</label>
-        <form:input type="textarea" path="content" id="reviewId" rows="3" cols="20"/>
-        <form:errors path="content" element="div"/>
+    <div>
+        <c:if test = "${addedReview == false}">
+            <form:form method="post" modelAttribute="review">
+                <label for="reviewId">Review:</label>
+                <form:input type="textarea" path="content" id="reviewId" rows="3" cols="20"/>
+                <form:errors path="content" element="div"/>
+                <form:select path="note">
+                    <c:forEach var="number" begin="1" end="5">
+                        <form:option value="${number}"/>
+                    </c:forEach>
+                </form:select>
 
-        <br/><br/>
-
-        <input type="submit" value="Add Review">
-    </form:form>
-</div>
-<c:forEach var="promotion" items="${list}">
-    <tr>
-        <td>${promotion.name}</td>
-        <td>${promotion.description}</td>
-        <td>${promotion.price}</td>
-        <td>${promotion.dayOfWeek}</td>
-        <td>${promotion.restaurant.name}</td>
-        <td>
-            <a href="/promotion/${promotion.id}">Zobacz</a>
-        </td>
-    </tr>
-</c:forEach>
-
+                <input type="submit" value="Add Review">
+            </form:form>
+        </c:if>
+    </div>
+<table>
+    <c:forEach var="review" items="${promotion.reviews}">
+        <tr>
+            <td>${review.user.username}</td>
+            <td>${review.content}</td>
+            <td>${review.note}</td>
+        </tr>
+    </c:forEach>
+</table>
 <%@ include file="../fragments/jsCode.jsp" %>
 </body>
 </html>

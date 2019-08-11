@@ -6,11 +6,11 @@ import org.springframework.core.convert.converter.Converter;
 public class RestaurantConverter implements Converter<String, Restaurant> {
 
     @Autowired
-    private RestaurantDao restaurantDao;
+    private RestaurantRepository restaurantRepository;
 
     @Override
     public Restaurant convert(String s) {
         Long id = Long.parseLong(s);
-        return restaurantDao.find(id);
+        return restaurantRepository.findById(id).get();
     }
 }
