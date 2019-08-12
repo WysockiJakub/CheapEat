@@ -19,7 +19,6 @@ public class SearchController {
 
     private PromotionRepository promotionRepository;
 
-
     @Autowired
     public SearchController(PromotionRepository promotionRepository) {
         this.promotionRepository = promotionRepository;
@@ -49,5 +48,10 @@ public class SearchController {
         return "search";
     }
 
-
+    @GetMapping("/{category}")
+    public String searchByCategory(@PathVariable String category, Model model) {
+        List<Promotion> list = promotionRepository.findAllByCategory(category);
+        model.addAttribute("list", list);
+        return "search";
+    }
 }

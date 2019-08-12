@@ -43,6 +43,18 @@
     <td>
         <a href="/search/day/7">Niedziela</a>
     </td>
+    <td>
+        <a href="/search/Polska">Polska</a>
+    </td>
+    <td>
+        <a href="/search/Owoce%20morza">Owoce morza</a>
+    </td>
+    <td>
+        <a href="/search/Burger">Burger</a>
+    </td>
+    <td>
+        <a href="/search/Amerykanska">Amerykanska</a>
+    </td>
 
 </tr>
 </table>
@@ -68,7 +80,7 @@
             <a href="/promotion/${promotion.id}">Zobacz</a>
         </td>
         </tr>
-</c:forEach>
+    </c:forEach>
     </tbody>
 </table>
 

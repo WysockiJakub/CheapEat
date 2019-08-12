@@ -26,7 +26,7 @@ public class Restaurant {
 
     private String email;
 
-    private String localizationUrl;
+//    private String localizationUrl;
 
     @OneToMany(mappedBy = "restaurant")
     private List<Promotion> promotions;
@@ -107,11 +107,11 @@ public class Restaurant {
         return id;
     }
 
-    public String getLocalizationUrl() {
-        return localizationUrl;
-    }
-
-    public void setLocalizationUrl(String localizationUrl) {
-        this.localizationUrl = localizationUrl;
-    }
+//    public String getLocalizationUrl() {
+//        return localizationUrl;
+//    }
+//
+//    public void setLocalizationUrl(String localizationUrl) {
+//        this.localizationUrl = localizationUrl;
+//    }
 }

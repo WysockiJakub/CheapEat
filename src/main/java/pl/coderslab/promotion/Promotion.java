@@ -1,7 +1,6 @@
 package pl.coderslab.promotion;
 
 import org.hibernate.validator.constraints.NotBlank;
-import pl.coderslab.auth.model.User;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.review.Review;
 
@@ -53,7 +52,7 @@ public class Promotion {
     public Promotion() {
     }
 
-    public Promotion(String name, String description, double price, DayOfWeek dayOfWeek, Restaurant restaurant, List<User> users, List<Review> reviews) {
+    public Promotion(String name, String description, double price, DayOfWeek dayOfWeek, Restaurant restaurant, List<Review> reviews) {
         this.name = name;
         this.description = description;
         this.price = price;
