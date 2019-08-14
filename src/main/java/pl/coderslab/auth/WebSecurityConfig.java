@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/registration").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/restaurateur/**").access("hasRole('ROLE_RESTAURATEUR')")
+                .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -45,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth
+                .userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

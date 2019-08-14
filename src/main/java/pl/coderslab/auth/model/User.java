@@ -2,6 +2,7 @@ package pl.coderslab.auth.model;
 
 import org.springframework.lang.Nullable;
 import pl.coderslab.promotion.Promotion;
+import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.review.Review;
 
 import javax.persistence.*;
@@ -37,8 +38,24 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Promotion> favouritesPromotions = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private Restaurant restaurant;                      //jesli użytkownik jest restauratorem to ma jedna restaurację
+
 //    @OneToMany
 //    private List<Review> reviews = new ArrayList<>();
+
+    //--------------METODY-----------------------------
+
+
+    public void addFavouritePromotion(Promotion promotion) {
+        favouritesPromotions.add(promotion);
+    }
+
+    public void deleteFavouritePromotion(Promotion promotion) { favouritesPromotions.remove(promotion); }
+
+
+
+    //--------------GETTERY I SETTERY---------------------
 
     public Long getId() {
         return id;
@@ -93,7 +110,7 @@ public class User {
         return email;
     }
 
-    public void setEmail(@Nullable String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -102,7 +119,7 @@ public class User {
         return address;
     }
 
-    public void setAddress(@Nullable String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -111,13 +128,15 @@ public class User {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(@Nullable String dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void addFavouritePromotion(Promotion promotion) {
-        favouritesPromotions.add(promotion);
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void deleteFavouritePromotion(Promotion promotion) { favouritesPromotions.remove(promotion); }
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

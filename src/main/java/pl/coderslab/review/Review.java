@@ -19,16 +19,19 @@ public class Review {
 
     private String content;
 
-    @ManyToOne
-    private User user;
+    private String username;
+
+//    @ManyToOne
+//    private User user;
 
     public Review() {
     }
 
-    public Review(Integer note, String content, User user) {
+    public Review(Integer note, String content, User user, String username) {
         this.note = note;
         this.content = content;
-        this.user = user;
+//        this.user = user;
+        this.username = username;
     }
 
     public Long getId() {
@@ -55,11 +58,19 @@ public class Review {
         this.content = content;
     }
 
-    public User getUser() {
-        return user;
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

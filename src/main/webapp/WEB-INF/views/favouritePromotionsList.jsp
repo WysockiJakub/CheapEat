@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<%@ include file="../fragments/header.jsp" %>
+<%@ include file="../fragments/headerUser.jsp" %>
 
 </table>
 <table class="table table-striped">

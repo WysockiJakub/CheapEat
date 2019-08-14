@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<%@ include file="../fragments/header.jsp" %>
+<%@ include file="../fragments/headerUser.jsp" %>
 
 <h1>Tekst opisujący aplikację</h1>
 <%@ include file="../fragments/jsCode.jsp" %>

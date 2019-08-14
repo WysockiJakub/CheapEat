@@ -32,15 +32,9 @@ public class TestController {
         this.promotionRepository = promotionRepository;
     }
 
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String test(@PathVariable Long id) {
-//        String username = UserUtilities.getLoggedUser();
-//        User user = userService.findByUsername(username);
-//        model.addAttribute("user", user);
-//        Long id = userRepository.findById(UserUtilities.getLoggedUserId().intValue());
+    @GetMapping("")
+    public String test() {
 
-        double test =  promotionRepository.getAverageNoteByPromotionId(id);
-        return String.valueOf(test);
+        return "dashboard2";
     }
 }

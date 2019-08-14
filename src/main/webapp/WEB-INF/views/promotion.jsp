@@ -14,7 +14,7 @@
     <%@ include file="../fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../fragments/header.jsp" %>
+<%@ include file="../fragments/headerUser.jsp" %>
 
 <div>
     <table>
@@ -65,7 +65,7 @@
 <table>
     <c:forEach var="review" items="${promotion.reviews}">
         <tr>
-            <td>${review.user.username}</td>
+            <td>${review.username}</td>
             <td>${review.content}</td>
             <td>${review.note}</td>
         </tr>

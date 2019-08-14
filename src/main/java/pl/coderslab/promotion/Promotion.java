@@ -5,6 +5,7 @@ import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.review.Review;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -32,13 +33,13 @@ public class Promotion {
     @NotBlank
     private String category;
 
-    @NotBlank
+    @Min(value = 0)
+    @Column(precision=8, scale=2)
     private double price;
 
     @Transient
     private double averageNote;
 
-    @NotBlank
     private DayOfWeek dayOfWeek;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

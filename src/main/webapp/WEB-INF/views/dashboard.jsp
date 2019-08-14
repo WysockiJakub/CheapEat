@@ -8,7 +8,7 @@
     <%@ include file="../fragments/head.jsp" %>
 </head>
 <body>
-    <%@ include file="../fragments/header.jsp" %>
+    <%@ include file="../fragments/headerUser.jsp" %>
 
     <%@ include file="../fragments/jsCode.jsp" %>
 </body>

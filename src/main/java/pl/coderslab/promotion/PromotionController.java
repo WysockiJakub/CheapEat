@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/promotion")
+@RequestMapping("/user")
 public class PromotionController {
 
     private PromotionRepository promotionRepository;
@@ -40,9 +40,10 @@ public class PromotionController {
     List<Restaurant> restaurants() { return restaurantRepository.findAll();}
 
 
+
     //---------WYŚWIETL PROMOCJĘ--------------
 
-    @GetMapping("/{id}")
+    @GetMapping("/promotion/{id}")
     public String checkPromotion(@PathVariable Long id, Model model) {
         Promotion promotion = promotionRepository.getFirstById(id);
         promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
@@ -51,9 +52,9 @@ public class PromotionController {
             model.addAttribute("favourite", true);
         }
         model.addAttribute("addedReview",false);
-//        if (reviewRepository.findOneByUserIdAndPromotionId(UserUtilities.getLoggedUser(userRepository).getId(), promotion.getId()) != null) {
-//            model.addAttribute("addedReview",true);
-//        }
+        if (reviewRepository.findByUsername(UserUtilities.getLoggedUser(userRepository).getUsername()) != null) {
+            model.addAttribute("addedReview",true);
+        }
         model.addAttribute("promotion", promotion);
         model.addAttribute("review", new Review());
 
@@ -62,7 +63,7 @@ public class PromotionController {
 
     //---------WYŚWIETL LISTE ULUBIONYCH PROMOCJI---------
 
-    @GetMapping("/favouritePromotions")
+    @GetMapping("/promotion/favouritePromotions")
     public String search(Model model) {
         User user = UserUtilities.getLoggedUser(userRepository);
         List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
@@ -72,14 +73,14 @@ public class PromotionController {
 
     //---------DODAJ RECENZJE DO PROMOCJI-----------------
 
-    @PostMapping("/{promotionId}")
+    @PostMapping("/promotion/{promotionId}")
     public String addReviewToPromotion(@PathVariable Long promotionId, @ModelAttribute Review review, BindingResult result){
         if (result.hasErrors()) {
             return "promotion";
         }
         Promotion pr = promotionRepository.getFirstById(promotionId);
         User user = UserUtilities.getLoggedUser(userRepository);
-        review.setUser(user);
+        review.setUsername(user.getUsername());
         reviewRepository.save(review);
         pr.addToReviews(review);
         promotionRepository.save(pr);
@@ -88,7 +89,7 @@ public class PromotionController {
 
     //-----------DODAJ PROMOCJĘ DO ULUBIONYCH--------------
 
-    @GetMapping("/addToFavourite/{id}")
+    @GetMapping("/promotion/addToFavourite/{id}")
     public String addToFavourite(@PathVariable Long id) {
 
         User user = UserUtilities.getLoggedUser(userRepository);
@@ -98,7 +99,7 @@ public class PromotionController {
         return "redirect:/promotion/" + id;
     }
 
-    @GetMapping("/deleteFromFavourite/{id}")
+    @GetMapping("/promotion/deleteFromFavourite/{id}")
     public String deleteFromFavourite(@PathVariable Long id) {
         User user = UserUtilities.getLoggedUser(userRepository);
         Promotion promotion = promotionRepository.getFirstById(id);
@@ -109,17 +110,17 @@ public class PromotionController {
 
     //----------DODAJ PROMOCJĘ-------------
 
-    @GetMapping("/add")
+    @GetMapping("/promotion/add")
     public String addPromotion(Model model) {
         Promotion promotion = new Promotion();
         model.addAttribute("promotion", promotion);
-        return "promotionAddForm";
+        return "restaurateur/promotionAddForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/promotion/add")
     public String addPromotion(@ModelAttribute @Valid Promotion promotion, BindingResult result) {
         if (result.hasErrors()) {
-            return "promotionAddForm";
+            return "restaurateur/promotionAddForm";
         }
         promotionRepository.save(promotion);
         return "redirect:./search";

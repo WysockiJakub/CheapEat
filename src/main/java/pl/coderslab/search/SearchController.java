@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/search")
+@RequestMapping("/user/promotion/search")
 public class SearchController {
 
     private PromotionRepository promotionRepository;

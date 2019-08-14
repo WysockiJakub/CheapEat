@@ -28,7 +28,7 @@ public class Restaurant {
 
 //    private String localizationUrl;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Promotion> promotions;
 
     public Restaurant() {
