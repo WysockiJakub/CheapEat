@@ -12,8 +12,8 @@
                     Mój Profil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/user/profil">Profil</a>
-                    <a class="dropdown-item" href="/user/promotion/favouritePromotions">Moje promocje</a>
+                    <a class="dropdown-item" href="#">Profil</a>
+                    <a class="dropdown-item" href="#">Moje promocje</a>
                     <a class="dropdown-item" href="#">Ulubione promocje</a>
                     <div class="dropdown-divider"></div>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -32,24 +32,14 @@
                     Restauracje
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/user/promotion/search">Wyszukaj</a>
-                    <a class="dropdown-item" href="/user/promotion/add">Dodaj restaurację</a>
+                    <a class="dropdown-item" href="/admin/restaurant/add/user">Dodaj restaurację</a>
                     <a class="dropdown-item" href="#">Zaproponuj</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/user/about">O Aplikacji<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/user/contact">Kontakt<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
                 <a class="nav-link" href="/test">Test<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/restaurateur">Restauracja<span class="sr-only">(current)</span></a>
             </li>
             <%--                <li class="nav-item">--%>
             <%--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--%>

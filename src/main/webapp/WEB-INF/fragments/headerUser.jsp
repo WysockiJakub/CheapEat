@@ -48,9 +48,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/test">Test<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/restaurateur">Restauracja<span class="sr-only">(current)</span></a>
-            </li>
             <%--                <li class="nav-item">--%>
             <%--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--%>
             <%--                </li>--%>

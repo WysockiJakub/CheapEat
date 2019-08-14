@@ -24,9 +24,6 @@
                     </c:if>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Promocje
@@ -39,10 +36,10 @@
                 </div>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/restaurateur/about">O Aplikacji<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">O Aplikacji<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/restaurateur/contact">Kontakt<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Kontakt<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/test">Test<span class="sr-only">(current)</span></a>
