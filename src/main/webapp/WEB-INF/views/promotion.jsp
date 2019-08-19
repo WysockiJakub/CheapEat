@@ -11,10 +11,10 @@
 <html>
 <head>
     <title>Title</title>
-    <%@ include file="../fragments/head.jsp" %>
+    <%@ include file="./fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../fragments/headerUser.jsp" %>
+<%@ include file="./fragments/headerUser.jsp" %>
 
 <div>
     <table>
@@ -25,6 +25,7 @@
         <th>Dzień promocji</th>
         <th>Restauracja</th>
         <th>Ocena</th>
+        <th>Subskrypcje</th>
     </tr>
         <tr>
             <td>${promotion.name}</td>
@@ -33,13 +34,14 @@
             <td>${promotion.dayOfWeek}</td>
             <td>${promotion.restaurant.name}</td>
             <td>${promotion.averageNote}</td>
+            <td>${promotion.subscription}</td>
             <td>
                 <c:choose>
                     <c:when test="${!favourite}">
-                        <a href="/promotion/addToFavourite/${promotion.id}">Dodaj do ulubionych</a>
+                        <a href="/user/promotion/addToFavourite/${promotion.id}">Dodaj do ulubionych</a>
                     </c:when>
                     <C:otherwise>
-                        <a href="/promotion/deleteFromFavourite/${promotion.id}">Usuń z ulubionych</a>
+                        <a href="/user/promotion/deleteFromFavourite/${promotion.id}">Usuń z ulubionych</a>
                     </C:otherwise>
                 </c:choose>
             </td>
@@ -71,6 +73,6 @@
         </tr>
     </c:forEach>
 </table>
-<%@ include file="../fragments/jsCode.jsp" %>
+<%@ include file="./fragments/jsCode.jsp" %>
 </body>
 </html>

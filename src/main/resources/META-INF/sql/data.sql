@@ -17,9 +17,13 @@ insert into promotion (category, name, description, price, dayOfWeek, restaurant
 insert into promotion (category, name, description, price, dayOfWeek, restaurant_id) values ("Amerykanska", "Teriyaki Pork Steak", "stek z karkówki w marynacie teriyaki", 20.00, 1, 6);
 insert into promotion (category, name, description, price, dayOfWeek, restaurant_id) values ("Amerykanska", "Chicken Bryan", "piers z kurczaka przykryta kozim serem i sosem", 26.00, 0, 6);
 
-insert into users (address, dateOfBirth, email, password, username) values ("Warszawa","01-02-2000", "test@test.pl", "$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "kubakuba");
-insert into users (address, dateOfBirth, email, password, username, restaurant_id) values ("Warszawa","01-02-2000", "test@test.pl", "$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "restaurant", 1);
-insert into users (address, dateOfBirth, email, password, username) values ("Warszawa","01-02-2000", "test@test.pl", "$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "admin");
+insert into users (password, username) values ("$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "kubakuba");
+insert into users (password, username, restaurant_id) values ("$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "restaurant", 1);
+insert into users (password, username) values ("$2a$10$xF1rNrQSliDv64JuR9xsueR8Lv503g03vm7uDjQBQFxcNbZCBDqIO", "admin");
+
+insert into userDetails (address, dateOfBirth, email) values ("Warszawa","01-02-2000", "test@test.pl", 1);
+insert into userDetails (address, dateOfBirth, email) values ("Warszawa","01-02-2000", "test@test.pl", 2);
+insert into userDetails (address, dateOfBirth, email) values ("Warszawa","01-02-2000", "test@test.pl", 3);
 
 insert into role (name) value ("ROLE_ADMIN");
 insert into role (name) value ("ROLE_USER");

@@ -12,7 +12,7 @@ import pl.coderslab.auth.repository.UserRepository;
 import pl.coderslab.utilities.UserUtilities;
 
 @Controller
-@RequestMapping("/contact")
+@RequestMapping("/user/contact")
 public class ContactController {
 
     private ContactRepository contactRepository;
@@ -37,7 +37,7 @@ public class ContactController {
             return "contact";
         }
         contactMessage.setUsername(UserUtilities.getLoggedUser(userRepository).getUsername());
-        String email = UserUtilities.getLoggedUser(userRepository).getEmail();
+        String email = UserUtilities.getLoggedUser(userRepository).getUserDetails().getEmail();
         contactMessage.setUserEmail(email);
         contactRepository.save(contactMessage);
         model.addAttribute("sended", "Dziekujemy za kontakt. Wiadomośc została wysłana");

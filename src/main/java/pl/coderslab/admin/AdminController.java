@@ -14,9 +14,7 @@ import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.restaurant.RestaurantRepository;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -36,9 +34,6 @@ public class AdminController {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
-
-//    @ModelAttribute(name = "roles")
-//    List<String> roles() { return Arrays.asList("ROLE_RESTAURATEUR");}
 
     @GetMapping("/dashboard")
     public String adminDashboard(){

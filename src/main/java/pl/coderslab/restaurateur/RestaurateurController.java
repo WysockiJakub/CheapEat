@@ -12,8 +12,8 @@ import pl.coderslab.promotion.PromotionService;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.restaurant.RestaurantRepository;
 import pl.coderslab.utilities.UserUtilities;
-import pl.coderslab.utilities.Utils;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.DayOfWeek;
 import java.util.Arrays;
@@ -46,13 +46,17 @@ public class RestaurateurController {
         return Arrays.asList(DayOfWeek.of(1), DayOfWeek.of(2), DayOfWeek.of(3), DayOfWeek.of(4), DayOfWeek.of(5), DayOfWeek.of(6), DayOfWeek.of(7));
     }
 
-    @ModelAttribute(name = "loggedUserRestaurant")
-    List<Restaurant> restaurant() {
-        return Arrays.asList(UserUtilities.getLoggedUser(userRepository).getRestaurant());
-    }
+//    @ModelAttribute(name = "loggedUserRestaurant")
+//    Restaurant restaurant() {
+//        Long restaurantId = UserUtilities.getLoggedUser(userRepository).getRestaurant().getId();
+//        Restaurant restaurant = restaurantRepository.findById(restaurantId);
+//        return ;
+//    }
 
-    @GetMapping("")
-    public String restaurateurDashboard() {
+    @GetMapping("/dashboard")
+    public String restaurateurDashboard(HttpSession sess) {
+        Restaurant restaurant = UserUtilities.getLoggedUser(userRepository).getRestaurant();
+        sess.setAttribute("restaurant", restaurant);
         return "restaurateur/restaurateurDashboard";
     }
 
@@ -61,9 +65,7 @@ public class RestaurateurController {
     //----------PROFIL RESTAURACJI-------------
 
     @GetMapping("/profil")
-    public String showRestaurantProfile(Model model) {
-        Restaurant restaurant = UserUtilities.getLoggedUser(userRepository).getRestaurant();
-        model.addAttribute("restaurant", restaurant);
+    public String showRestaurantProfile() {
         return "restaurateur/restaurantProfile";
     }
 
@@ -79,14 +81,8 @@ public class RestaurateurController {
     //--------WYSWIETLANIE PROMOCJI Z MOŻLIWOŚCIĄ ZMIANY DANYCH-------------------
 
     @GetMapping("/promotion/{promotionId}")
-    public String showPromotion(@PathVariable Long promotionId, Model model) {
-        List<Promotion> promotionList = UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions();
-        Promotion promotion = null;
-        for (Promotion p : promotionList) {
-            if (p.getId().equals(promotionId)) {
-                promotion = p;
-            }
-        }
+    public String showPromotion(@PathVariable Long promotionId, Model model, HttpSession sess) {
+        Promotion promotion = promotionRepository.findById(promotionId).get();
         model.addAttribute("promotion", promotion);
         return "restaurateur/showPromotion";
     }
@@ -96,7 +92,9 @@ public class RestaurateurController {
         if (result.hasErrors()) {
             return "restaurateur/showPromotion";
         }
-//        promotion.setRestaurant(UserUtilities.getLoggedUser(userRepository).getRestaurant());
+        Long restaurantId = UserUtilities.getLoggedUser(userRepository).getRestaurant().getId();
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        promotion.setRestaurant(restaurant);
         promotion.setId(promotionId);
         promotionRepository.save(promotion);
         model.addAttribute("saved", true);
@@ -118,7 +116,7 @@ public class RestaurateurController {
         if (result.hasErrors()) {
             return "restaurateur/promotionAddForm";
         }
-        promotion.setRestaurant(restaurantRepository.getOne(restaurant().get(0).getId()));
+//        promotion.setRestaurant(restaurantRepository.getOne(restaurant().get(0).getId()));
         promotionRepository.save(promotion);
         return "redirect:/restaurateur/promotion/list";
     }

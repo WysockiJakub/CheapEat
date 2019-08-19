@@ -5,11 +5,11 @@
 <html>
 <head>
     <title>CheapEat</title>
-    <%@ include file="../../fragments/head.jsp" %>
+    <%@ include file="./../fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../../fragments/headerRestarateur.jsp" %>
+<%@ include file="./../fragments/headerRestarateur.jsp" %>
 
-<%@ include file="../../fragments/jsCode.jsp" %>
+<%@ include file="./../fragments/jsCode.jsp" %>
 </body>
 </html>

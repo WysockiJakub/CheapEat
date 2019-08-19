@@ -6,10 +6,10 @@
 <html>
 <head>
     <title>CheapEat</title>
-    <%@ include file="../../fragments/head.jsp" %>
+    <%@ include file="./../fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../../fragments/headerRestarateur.jsp" %>
+<%@ include file="./../fragments/headerRestarateur.jsp" %>
 
 <div>
     <form:form method="post" modelAttribute="promotion">
@@ -43,11 +43,11 @@
 
         <br/><br/>
 
-        <label for="restaurantId">Restauracja:</label>
-        <form:select path="restaurant.id" item="${loggedUserRestaurant}" itemLabel="name" itemValue="id" id="restaurantId"/>
-        <form:errors path="restaurant" element="div"/>
+<%--        <label for="restaurantId">Restauracja:</label>--%>
+<%--        <form:select path="restaurant.id" item="${loggedUserRestaurant}" itemLabel="name" itemValue="id" id="restaurantId"/>--%>
+<%--        <form:errors path="restaurant" element="div"/>--%>
 
-        <br/><br/>
+<%--        <br/><br/>--%>
 
         <input type="submit" value="Save">
         <c:if test="${saved == true}">
@@ -57,6 +57,6 @@
     </form:form>
 </div>
 
-<%@ include file="../../fragments/jsCode.jsp" %>
+<%@ include file="./../fragments/jsCode.jsp" %>
 </body>
 </html>

@@ -26,6 +26,9 @@ public class Restaurant {
 
     private String email;
 
+    @Transient
+    private double avgNote;
+
 //    private String localizationUrl;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -107,8 +110,15 @@ public class Restaurant {
         return id;
     }
 
-//    public String getLocalizationUrl() {
-//        return localizationUrl;
+    public double getAvgNote() {
+        return avgNote;
+    }
+
+    public void setAvgNote(double avgNote) {
+        this.avgNote = avgNote;
+    }
+
+//    public String getLocalizationUrl() { return localizationUrl;
 //    }
 //
 //    public void setLocalizationUrl(String localizationUrl) {

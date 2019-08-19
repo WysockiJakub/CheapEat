@@ -10,11 +10,11 @@
 <html>
 <head>
     <title>Dodaj promocję</title>
-    <%@ include file="../../fragments/head.jsp" %>
+    <%@ include file="./../fragments/head.jsp" %>
 
 </head>
 <body>
-<%@ include file="../../fragments/headerUser.jsp" %>
+<%@ include file="./../fragments/headerUser.jsp" %>
 <div>
     <form:form method="post" modelAttribute="promotion">
         <label for="nameId">Nazwa:</label>
@@ -35,7 +35,7 @@
 
         <br/><br/>
 
-        <label for="categoryId">Restauracja:</label>
+        <label for="categoryId">Kategoria:</label>
         <form:select path="category" items="${categories}" id="categoryId"/>
         <form:errors path="category" element="div"/>
 
@@ -48,16 +48,10 @@
         <br/><br/>
 
 
-        <label for="restaurantId">Restauracja:</label>
-        <form:select path="restaurant.id" items="${loggedUserRestaurant}" itemLabel="name" itemValue="id" id="restaurantId" disabled="true"/>
-        <form:errors path="restaurant" element="div"/>
-
-        <br/><br/>
-
         <input type="submit" value="Save">
     </form:form>
 </div>
-<%@ include file="../../fragments/jsCode.jsp" %>
+<%@ include file="./../fragments/jsCode.jsp" %>
 
 </body>
 </html>

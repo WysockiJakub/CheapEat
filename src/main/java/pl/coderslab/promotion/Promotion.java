@@ -40,6 +40,9 @@ public class Promotion {
     @Transient
     private double averageNote;
 
+    @Transient
+    private int subscription;
+
     private DayOfWeek dayOfWeek;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -72,13 +75,13 @@ public class Promotion {
         reviews.add(review);
     }
 
-
-    //------------GETTERY I SETTERY----------------
-
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    //------------GETTERY I SETTERY----------------
+
 
     public String getName() {
         return name;
@@ -150,6 +153,14 @@ public class Promotion {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(int subscription) {
+        this.subscription = subscription;
     }
 
     @Override

@@ -47,13 +47,20 @@ public class PromotionController {
     public String checkPromotion(@PathVariable Long id, Model model) {
         Promotion promotion = promotionRepository.getFirstById(id);
         promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
+
+        int subscriptions = promotionService.countPromotionSubscription(promotion);
+        promotion.setSubscription(subscriptions);
+
         model.addAttribute("favourite", false);                                                                     //sprawdzanie czy zalogowany użytkownik posiada w ulubionych aktualnie wyświetlana promocję
         if (UserUtilities.getLoggedUser(userRepository).getFavouritesPromotions().contains(promotion)) {
             model.addAttribute("favourite", true);
         }
         model.addAttribute("addedReview",false);
-        if (reviewRepository.findByUsername(UserUtilities.getLoggedUser(userRepository).getUsername()) != null) {
-            model.addAttribute("addedReview",true);
+        for (Review review : promotion.getReviews()) {
+            if (review.getUsername().equals(UserUtilities.getLoggedUser(userRepository).getUsername())) {
+                model.addAttribute("addedReview", true);
+                break;
+            }
         }
         model.addAttribute("promotion", promotion);
         model.addAttribute("review", new Review());
@@ -84,7 +91,7 @@ public class PromotionController {
         reviewRepository.save(review);
         pr.addToReviews(review);
         promotionRepository.save(pr);
-        return "redirect:/promotion/" + promotionId;
+        return "redirect:/user/promotion/" + promotionId;
     }
 
     //-----------DODAJ PROMOCJĘ DO ULUBIONYCH--------------
@@ -96,7 +103,7 @@ public class PromotionController {
         Promotion promotion = promotionRepository.getFirstById(id);
         user.addFavouritePromotion(promotion);
         userRepository.save(user);
-        return "redirect:/promotion/" + id;
+        return "redirect:/user/promotion/" + id;
     }
 
     @GetMapping("/promotion/deleteFromFavourite/{id}")
@@ -105,7 +112,7 @@ public class PromotionController {
         Promotion promotion = promotionRepository.getFirstById(id);
         user.deleteFavouritePromotion(promotion);
         userRepository.save(user);
-        return "redirect:/promotion/" + id;
+        return "redirect:/user/promotion/" + id;
     }
 
     //----------DODAJ PROMOCJĘ-------------
@@ -123,7 +130,7 @@ public class PromotionController {
             return "restaurateur/promotionAddForm";
         }
         promotionRepository.save(promotion);
-        return "redirect:./search";
+        return "redirect:./user/search";
     }
 
 

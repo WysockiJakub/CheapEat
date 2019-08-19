@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>Title</title>
-    <%@ include file="../fragments/head.jsp" %>
+    <%@ include file="./fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../fragments/headerUser.jsp" %>
+<%@ include file="./fragments/headerUser.jsp" %>
 
 <h2>Tekst kontaktu</h2>
 
@@ -31,7 +31,7 @@
 <br/><br/>
 
 <div>${sended}</div>
-<%@ include file="../fragments/jsCode.jsp" %>
+<%@ include file="./fragments/jsCode.jsp" %>
 
 </body>
 </html>

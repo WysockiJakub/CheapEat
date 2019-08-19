@@ -22,12 +22,8 @@ public class User {
 
     private String password;
 
-    @Nullable
-    private String email;
-    @Nullable
-    private String address;
-    @Nullable
-    private String dateOfBirth;
+    @OneToOne(fetch = FetchType.EAGER)
+    private UserDetails userDetails;
 
     @Transient
     private String passwordConfirm;
@@ -105,31 +101,12 @@ public class User {
         this.favouritesPromotions = favouritesPromotions;
     }
 
-    @Nullable
-    public String getEmail() {
-        return email;
+    public UserDetails getUserDetails() {
+        return userDetails;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Nullable
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Nullable
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     public Restaurant getRestaurant() {

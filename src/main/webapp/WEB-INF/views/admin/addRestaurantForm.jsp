@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>Title</title>
-    <%@ include file="../../fragments/head.jsp" %>
+    <%@ include file="./../fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../../fragments/headerAdmin.jsp" %>
+<%@ include file="./../fragments/headerAdmin.jsp" %>
 
 <div>
     <form:form method="post" modelAttribute="restaurant">
@@ -26,7 +26,7 @@
         <input type="submit" value="Dodaj">
     </form:form>
 </div>
-<%@ include file="../../fragments/jsCode.jsp" %>
+<%@ include file="./../fragments/jsCode.jsp" %>
 
 </body>
 </html>

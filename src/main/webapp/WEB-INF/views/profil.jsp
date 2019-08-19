@@ -9,26 +9,26 @@
 <html>
 <head>
     <title>Profil</title>
-    <%@ include file="../fragments/head.jsp" %>
+    <%@ include file="./fragments/head.jsp" %>
 </head>
 <body>
-<%@ include file="../fragments/headerUser.jsp" %>
+<%@ include file="./fragments/headerUser.jsp" %>
 
 <table>
     <tr>
-        <td>Nazwa użytkownika:</td>
-        <td>${user.username}</td>
+        <td>Data urodzenia:</td>
+        <td>${userDetails.dateOfBirth}</td>
     </tr>
     <tr>
         <td>Email:</td>
-        <td>${user.email}</td>
+        <td>${userDetails.email}</td>
     </tr>
     <tr>
         <td>Adres:</td>
-        <td>${user.address}</td>
+        <td>${userDetails.address}</td>
     </tr>
 </table>
 
-<%@ include file="../fragments/jsCode.jsp" %>
+<%@ include file="./fragments/jsCode.jsp" %>
 </body>
 </html>
