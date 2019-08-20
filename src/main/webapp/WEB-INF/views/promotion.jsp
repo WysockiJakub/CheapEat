@@ -48,6 +48,9 @@
         </tr>
     </table>
 </div>
+<div>
+    Liczba recenzji: ${promotion.reviews.size()}
+</div>
     <div>
         <c:if test = "${addedReview == false}">
             <form:form method="post" modelAttribute="review">
@@ -70,6 +73,7 @@
             <td>${review.username}</td>
             <td>${review.content}</td>
             <td>${review.note}</td>
+            <td>${review.created}</td>
         </tr>
     </c:forEach>
 </table>

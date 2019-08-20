@@ -1,10 +1,12 @@
 package pl.coderslab.review;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.promotion.Promotion;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
@@ -21,6 +23,10 @@ public class Review {
 
     private String username;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Column(name = "created_on")
+    private LocalDateTime created;
+
 //    @ManyToOne
 //    private User user;
 
@@ -32,6 +38,19 @@ public class Review {
         this.content = content;
 //        this.user = user;
         this.username = username;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        created = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     public Long getId() {

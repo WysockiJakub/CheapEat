@@ -11,38 +11,34 @@ import java.util.List;
 @Service
 public class RestaurantService {
 
-    private RestaurantRepository restaurantRepository;
     private PromotionService promotionService;
 
     @Autowired
-    public RestaurantService(RestaurantRepository restaurantRepository, PromotionService promotionService) {
-        this.restaurantRepository = restaurantRepository;
+    public RestaurantService(PromotionService promotionService) {
         this.promotionService = promotionService;
     }
 
-    public double countAvgRestaurantNote(Restaurant restaurant) {
+    public void countAvgRestaurantNote(Restaurant restaurant) {
 
         List<Promotion> promotions = restaurant.getPromotions();
         double sumOfPromotionsAvgNote = 0;
+        int promotionsWithReviews = 0;
 
-        for (Promotion p : promotions){
-            promotionService.countPromotionAverageNote(p);
-            sumOfPromotionsAvgNote += p.getAverageNote();
+        for (Promotion p : promotions) {
+            if (!p.getReviews().isEmpty()) {
+                promotionService.countPromotionAverageNote(p);
+                sumOfPromotionsAvgNote += p.getAverageNote();
+                promotionsWithReviews += 1;
+            }
         }
-        return Utils.round(sumOfPromotionsAvgNote / promotions.size(),2);
+        if (sumOfPromotionsAvgNote != 0) {
+            restaurant.setAvgNote(Utils.round(sumOfPromotionsAvgNote / promotionsWithReviews, 2));
+        }
     }
 
     public void countAvgRestaurantNoteForAllRestaurants(List<Restaurant> restaurants) {
-
         for (Restaurant restaurant : restaurants){
-
-            List<Promotion> promotions = restaurant.getPromotions();
-            double sumOfPromotionsAvgNote = 0;
-
-            for (Promotion p : promotions){
-                promotionService.countPromotionAverageNote(p);
-                p.setAverageNote(Utils.round(sumOfPromotionsAvgNote / promotions.size(),2));
-            }
+            countAvgRestaurantNote(restaurant);
         }
     }
 }

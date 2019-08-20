@@ -65,6 +65,18 @@ public class Promotion {
         this.reviews = reviews;
     }
 
+    public Promotion(String name, String description, String category, double price, double averageNote, int subscription, DayOfWeek dayOfWeek, Restaurant restaurant, List<Review> reviews) {
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.averageNote = averageNote;
+        this.subscription = subscription;
+        this.dayOfWeek = dayOfWeek;
+        this.restaurant = restaurant;
+        this.reviews = reviews;
+    }
+
     @Override
     public boolean equals(Object o) {
         Promotion promotion = (Promotion) o;
@@ -169,9 +181,13 @@ public class Promotion {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
                 ", price=" + price +
+                ", averageNote=" + averageNote +
+                ", subscription=" + subscription +
                 ", dayOfWeek=" + dayOfWeek +
-                ", restaurant=" + restaurant+
+                ", restaurant=" + restaurant +
+                ", reviews=" + reviews +
                 '}';
     }
 }

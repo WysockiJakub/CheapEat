@@ -26,7 +26,7 @@
         <a href="/user/search/promotion/day/1">Poniedzialek</a>
     </td>
     <td>
-        <a href="/usersearch//promotion/day/2">Wtorek</a>
+        <a href="/user/search/promotion/day/2">Wtorek</a>
     </td>
     <td>
         <a href="/user/search/promotion/day/3">Środa</a>
@@ -54,6 +54,9 @@
     </td>
     <td>
         <a href="/user/search/promotion/Amerykanska">Amerykanska</a>
+    </td>
+    <td>
+        <a href="/user/search/promotion/note">Najlepsze</a>
     </td>
 
 </tr>

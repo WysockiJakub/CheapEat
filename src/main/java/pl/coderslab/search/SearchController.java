@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.promotion.Promotion;
 import pl.coderslab.promotion.PromotionRepository;
+import pl.coderslab.promotion.PromotionService;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.restaurant.RestaurantRepository;
 import pl.coderslab.restaurant.RestaurantService;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -23,12 +25,14 @@ public class SearchController {
     private PromotionRepository promotionRepository;
     private RestaurantRepository restaurantRepository;
     private RestaurantService restaurantService;
+    private PromotionService promotionService;
 
     @Autowired
-    public SearchController(PromotionRepository promotionRepository, RestaurantRepository restaurantRepository, RestaurantService restaurantService) {
+    public SearchController(PromotionRepository promotionRepository, RestaurantRepository restaurantRepository, RestaurantService restaurantService, PromotionService promotionService) {
         this.promotionRepository = promotionRepository;
         this.restaurantRepository = restaurantRepository;
         this.restaurantService = restaurantService;
+        this.promotionService = promotionService;
     }
 
     //-------------PROMOCJE----------------------
@@ -64,13 +68,23 @@ public class SearchController {
         return "searchPromotion";
     }
 
+    @GetMapping("/promotion/note")
+    public String searchByAvgNote(Model model) {
+        List<Promotion> list = promotionRepository.findAll();
+        promotionService.countPromotionAverageNoteForAllPromotions(list);
+        list.stream()
+                .sorted(Comparator.comparing(Promotion::getAverageNote));
+        model.addAttribute("list", list);
+        return "searchPromotion";
+    }
+
     //------------RESTAURACJE-------------------
 
     @GetMapping(value = {"/restaurant", "/restaurant/all"})
     public String searchAll(Model model) {
-        List<Restaurant> allrestaurants = restaurantRepository.findAll();
-        restaurantService.countAvgRestaurantNoteForAllRestaurants(allrestaurants);
-        model.addAttribute("list", allrestaurants);
+        List<Restaurant> allRestaurants = restaurantRepository.findAll();
+        restaurantService.countAvgRestaurantNoteForAllRestaurants(allRestaurants);
+        model.addAttribute("list", allRestaurants);
         return "searchRestaurant";
     }
 

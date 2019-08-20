@@ -29,6 +29,12 @@ public class PromotionService {
         }
     }
 
+    public void countPromotionAverageNoteForAllPromotions(List<Promotion> promotions) {
+        for (Promotion p : promotions) {
+            countPromotionAverageNote(p);
+        }
+    }
+
     public int countPromotionSubscription(Promotion promotion) {
         List<User> allUsers = userRepository.findAll();
         int subscription = 0;

@@ -17,43 +17,43 @@
 <table>
     <tr>
         <td>
-            <a href="/user/search/promotion/all">Wszystkie</a>
+            <a href="/user/search/restaurant/all">Wszystkie</a>
         </td>
         <td>
-            <a href="/user/search/promotion/today">Dzisiaj</a>
+            <a href="/user/search/restaurant/today">Dzisiaj</a>
         </td>
         <td>
-            <a href="/user/search/promotion/day/1">Poniedzialek</a>
+            <a href="/user/search/restaurant/day/1">Poniedzialek</a>
         </td>
         <td>
-            <a href="/usersearch//promotion/day/2">Wtorek</a>
+            <a href="/usersearch/restaurant/day/2">Wtorek</a>
         </td>
         <td>
-            <a href="/user/search/promotion/day/3">Środa</a>
+            <a href="/user/search/restaurant/day/3">Środa</a>
         </td>
         <td>
-            <a href="/user/search/promotion/day/4">Czwartek</a>
+            <a href="/user/search/restaurant/day/4">Czwartek</a>
         </td>
         <td>
-            <a href="/user/search/promotion/day/5">Piątek</a>
+            <a href="/user/search/restaurant/day/5">Piątek</a>
         </td>
         <td>
-            <a href="/user/search/promotion/day/6">Sobota</a>
+            <a href="/user/search/restaurant/day/6">Sobota</a>
         </td>
         <td>
-            <a href="/user/search/promotion/day/7">Niedziela</a>
+            <a href="/user/search/restaurant/day/7">Niedziela</a>
         </td>
         <td>
-            <a href="/user/search/promotion/Polska">Polska</a>
+            <a href="/user/search/restaurant/Polska">Polska</a>
         </td>
         <td>
-            <a href="/user/search/promotion/Owoce%20morza">Owoce morza</a>
+            <a href="/user/search/restaurant/Owoce%20morza">Owoce morza</a>
         </td>
         <td>
-            <a href="/user/search/promotion/Burger">Burger</a>
+            <a href="/user/search/restaurant/Burger">Burger</a>
         </td>
         <td>
-            <a href="/user/search/promotion/Amerykanska">Amerykanska</a>
+            <a href="/user/search/restaurant/Amerykanska">Amerykanska</a>
         </td>
 
     </tr>
@@ -73,7 +73,7 @@
             <td>${restaurant.avgNote}</td>
 <%--            <td>${restaurant.price}</td>--%>
             <td>
-                <a href="/user/promotion/${restaurant.id}">Zobacz</a>
+                <a href="/user/restaurant/${restaurant.id}">Zobacz</a>
             </td>
         </tr>
     </c:forEach>

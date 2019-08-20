@@ -47,9 +47,6 @@ public class Restaurant {
         this.promotions = promotions;
     }
 
-//private List<Integer> notes = new ArrayList<>();
-
-
     public String getName() {
         return name;
     }
