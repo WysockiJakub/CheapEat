@@ -115,24 +115,6 @@ public class PromotionController {
         return "redirect:/user/promotion/" + id;
     }
 
-    //----------DODAJ PROMOCJĘ-------------
-
-    @GetMapping("/promotion/add")
-    public String addPromotion(Model model) {
-        Promotion promotion = new Promotion();
-        model.addAttribute("promotion", promotion);
-        return "restaurateur/promotionAddForm";
-    }
-
-    @PostMapping("/promotion/add")
-    public String addPromotion(@ModelAttribute @Valid Promotion promotion, BindingResult result) {
-        if (result.hasErrors()) {
-            return "restaurateur/promotionAddForm";
-        }
-        promotionRepository.save(promotion);
-        return "redirect:./user/search";
-    }
-
 
 
 

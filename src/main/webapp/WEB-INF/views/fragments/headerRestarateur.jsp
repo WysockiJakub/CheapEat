@@ -12,7 +12,7 @@
                     Profil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/restaurateur/profil">Restauracja</a>
+                    <a class="dropdown-item" href="/restaurateur/restaurant/profil">Restauracja</a>
                     <a class="dropdown-item" href="/restaurateur/stats">Statystyki</a>
 <%--                    <a class="dropdown-item" href="#">Ulubione promocje</a>--%>
                     <div class="dropdown-divider"></div>

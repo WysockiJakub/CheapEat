@@ -65,7 +65,6 @@
     <thead>
     <tr>
         <th scope="col">Promocja</th>
-        <th scope="col">Opis</th>
         <th scope="col">Cena</th>
         <th scope="col">Dzień promocji</th>
         <th scope="col">Restauracja</th>
@@ -75,7 +74,6 @@
     <c:forEach var="promotion" items="${list}">
         <tr>
         <td>${promotion.name}</td>
-        <td>${promotion.description}</td>
         <td>${promotion.price}</td>
         <td>${promotion.dayOfWeek}</td>
         <td>${promotion.restaurant.name}</td>

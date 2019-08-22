@@ -41,7 +41,7 @@ public class SearchController {
     public String search(Model model) {
         List<Promotion> list = promotionRepository.findAll();
         model.addAttribute("list", list);
-        return "searchPromotion";
+        return "searchPromotionNew";
     }
 
     @GetMapping("/promotion/today")
@@ -85,7 +85,7 @@ public class SearchController {
         List<Restaurant> allRestaurants = restaurantRepository.findAll();
         restaurantService.countAvgRestaurantNoteForAllRestaurants(allRestaurants);
         model.addAttribute("list", allRestaurants);
-        return "searchRestaurant";
+        return "searchRestaurantNew";
     }
 
 }

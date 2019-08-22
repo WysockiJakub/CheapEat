@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.auth.model.User;
 import pl.coderslab.auth.repository.UserRepository;
 import pl.coderslab.promotion.Promotion;
 import pl.coderslab.promotion.PromotionRepository;
@@ -38,7 +39,7 @@ public class RestaurateurController {
 
     @ModelAttribute(name = "categories")
     List<String> categories() {
-        return Arrays.asList("Polska", "Amerykanska", "Owoce morza", "Burger");
+        return Arrays.asList("Dania wegetariańskie", "Chińszczyzna", "Owoce morza", "Naleśniki", "Obiady domowe", "Kebab", "Burgery", "Pierogi", "Sushi", "Makarony", "Sałatki", "Ramen", "Pizza", "Alkohole");
     }
 
     @ModelAttribute(name = "dayOfWeek")
@@ -64,9 +65,40 @@ public class RestaurateurController {
 
     //----------PROFIL RESTAURACJI-------------
 
-    @GetMapping("/profil")
-    public String showRestaurantProfile() {
+    @GetMapping("/restaurant/profil")
+    public String showRestaurantProfile(Model model) {
+        Restaurant restaurant = restaurantRepository.findByUserId(UserUtilities.getLoggedUser(userRepository).getId());
+        model.addAttribute("restaurant", restaurant);
         return "restaurateur/restaurantProfile";
+    }
+
+
+    //------------EDYCJA PROFILU RESTAURACJI----------------
+
+    @GetMapping("/restaurant/edit")
+    public String editRestaurantProfile(Model model) {
+        Restaurant restaurant = restaurantRepository.findByUserId(UserUtilities.getLoggedUser(userRepository).getId());
+        model.addAttribute("restaurant", restaurant);
+        return "restaurateur/editRestaurant";
+    }
+
+    @PostMapping("/restaurant/edit")
+    public String editRestaurantProfilePost(@ModelAttribute @Valid Restaurant request, BindingResult result) {
+        if (result.hasErrors()) {
+            return "restaurateur/editRestaurant";
+        }
+        Restaurant restaurant = restaurantRepository.findByUserId(UserUtilities.getLoggedUser(userRepository).getId());
+        restaurant.setName(request.getName());
+        restaurant.setInfo(request.getInfo());
+        restaurant.setCity(request.getCity());
+        restaurant.setZipCode(request.getZipCode());
+        restaurant.setStreet(request.getStreet());
+        restaurant.setHouseNumber(request.getHouseNumber());
+        restaurant.setWebsite(request.getWebsite());
+        restaurant.setEmail(request.getEmail());
+        restaurant.setPhoneNumber(request.getPhoneNumber());
+        restaurantRepository.save(restaurant);
+        return "redirect:/restaurateur/restaurant/profil";
     }
 
     //---------LISTA PROMOCJI ZALOGOWANEJ RESTAURACJI-------------
@@ -78,26 +110,46 @@ public class RestaurateurController {
         return "restaurateur/restaurantPromotionList";
     }
 
-    //--------WYSWIETLANIE PROMOCJI Z MOŻLIWOŚCIĄ ZMIANY DANYCH-------------------
+    //----------------WYSWIETLANIE PROMOCJI-------------------
 
-    @GetMapping("/promotion/{promotionId}")
-    public String showPromotion(@PathVariable Long promotionId, Model model, HttpSession sess) {
-        Promotion promotion = promotionRepository.findById(promotionId).get();
-        model.addAttribute("promotion", promotion);
-        return "restaurateur/showPromotion";
+
+    @GetMapping("/promotion/{id}")
+    public String checkPromotion(@PathVariable Long id, Model model) {
+        if (UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions().contains(promotionRepository.getFirstById(id))) {
+            Promotion promotion = promotionRepository.getFirstById(id);
+            promotionService.countPromotionAverageNote(promotion);
+            model.addAttribute("promotion", promotion);
+            return "restaurateur/showPromotion";
+        } else {
+            return "404";
+        }
     }
 
-    @PostMapping("/promotion/{promotionId}")
-    public String editPromotion(@ModelAttribute @Valid Promotion promotion, BindingResult result, Model model, @PathVariable Long promotionId) {
-        if (result.hasErrors()) {
-            return "restaurateur/showPromotion";
+        //--------------EDYCJA PROMOCJI--------
+
+    @GetMapping("/promotion/edit/{id}")
+    public String showPromotion(@PathVariable Long id, Model model) {
+        if (UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions().contains(promotionRepository.getFirstById(id))) {
+            Promotion promotion = promotionRepository.getFirstById(id);
+            model.addAttribute("promotion", promotion);
+            return "restaurateur/editPromotion";
+        } else {
+            return "404";
         }
-        Long restaurantId = UserUtilities.getLoggedUser(userRepository).getRestaurant().getId();
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
-        promotion.setRestaurant(restaurant);
-        promotion.setId(promotionId);
+    }
+
+    @PostMapping("/promotion/edit/{promotionId}")
+    public String editPromotion(@ModelAttribute @Valid Promotion request, BindingResult result, @PathVariable Long promotionId) {
+        if (result.hasErrors()) {
+            return "restaurateur/editPromotion";
+        }
+        Promotion promotion = promotionRepository.getFirstById(promotionId);
+        promotion.setName(request.getName());
+        promotion.setDescription(request.getDescription());
+        promotion.setPrice(request.getPrice());
+        promotion.setCategory(request.getCategory());
+        promotion.setDayOfWeek(request.getDayOfWeek());
         promotionRepository.save(promotion);
-        model.addAttribute("saved", true);
         return "redirect:/restaurateur/promotion/" + promotionId;
     }
 
@@ -116,10 +168,14 @@ public class RestaurateurController {
         if (result.hasErrors()) {
             return "restaurateur/promotionAddForm";
         }
-//        promotion.setRestaurant(restaurantRepository.getOne(restaurant().get(0).getId()));
         promotionRepository.save(promotion);
-        return "redirect:/restaurateur/promotion/list";
-    }
+        User user = UserUtilities.getLoggedUser(userRepository);
+        Long id = user.getId();
+        Restaurant restaurant = restaurantRepository.findByUserId(id);
+        promotion.setRestaurant(restaurant);
+        promotionRepository.save(promotion);
+
+        return "redirect:/restaurateur/promotion/list"; }
 
     //------------STATYSTYKI--------------------
 

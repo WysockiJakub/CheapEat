@@ -18,7 +18,10 @@ public class Restaurant {
 
     private String info;
 
-    private String address;
+    private String city;
+    private String street;
+    private String houseNumber;
+    private String zipCode;
 
     private String website;
 
@@ -29,7 +32,7 @@ public class Restaurant {
     @Transient
     private double avgNote;
 
-//    private String localizationUrl;
+    private String localizationUrl;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Promotion> promotions;
@@ -37,13 +40,18 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String name, String info, String address, String website, String phoneNumber, String email, List<Promotion> promotions) {
+    public Restaurant(String name, String info, String city, String street, String houseNumber, String zipCode, String website, String phoneNumber, String email, double avgNote, String localizationUrl, List<Promotion> promotions) {
         this.name = name;
         this.info = info;
-        this.address = address;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.zipCode = zipCode;
         this.website = website;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.avgNote = avgNote;
+        this.localizationUrl = localizationUrl;
         this.promotions = promotions;
     }
 
@@ -63,12 +71,40 @@ public class Restaurant {
         this.info = info;
     }
 
-    public String getAddress() {
-        return address;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getWebsite() {
@@ -115,10 +151,11 @@ public class Restaurant {
         this.avgNote = avgNote;
     }
 
-//    public String getLocalizationUrl() { return localizationUrl;
-//    }
-//
-//    public void setLocalizationUrl(String localizationUrl) {
-//        this.localizationUrl = localizationUrl;
-//    }
+    public String getLocalizationUrl() { return localizationUrl;
+    }
+
+    public void setLocalizationUrl(String localizationUrl) {
+        this.localizationUrl = localizationUrl;
+    }
+
 }
