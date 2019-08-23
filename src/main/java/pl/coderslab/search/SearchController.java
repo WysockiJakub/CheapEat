@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.promotion.Promotion;
@@ -15,6 +16,7 @@ import pl.coderslab.restaurant.RestaurantService;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -35,6 +37,11 @@ public class SearchController {
         this.promotionService = promotionService;
     }
 
+    @ModelAttribute(name = "categories")
+    List<String> categories() {
+        return Arrays.asList("Dania wegetariańskie", "Chińszczyzna", "Owoce morza", "Naleśniki", "Obiady domowe", "Kebab", "Burgery", "Pierogi", "Sushi", "Makarony", "Sałatki", "Ramen", "Pizza", "Alkohole");
+    }
+
     //-------------PROMOCJE----------------------
 
     @GetMapping(value={"/promotion", "/promotion/all"})
@@ -50,7 +57,7 @@ public class SearchController {
         DayOfWeek dow = date.getDayOfWeek();
         List<Promotion> list = promotionRepository.findAllByDayOfWeek(dow);
         model.addAttribute("list", list);
-        return "searchPromotion";
+        return "searchPromotionNew";
     }
 
     @GetMapping("/promotion/day/{day}")
@@ -58,14 +65,14 @@ public class SearchController {
         DayOfWeek dayOfWeek = DayOfWeek.of(day);
         List<Promotion> list = promotionRepository.findAllByDayOfWeek(dayOfWeek);
         model.addAttribute("list", list);
-        return "searchPromotion";
+        return "searchPromotionNew";
     }
 
-    @GetMapping("/promotion/{category}")
+    @GetMapping("/promotion/category/{category}")
     public String searchByCategory(@PathVariable String category, Model model) {
         List<Promotion> list = promotionRepository.findAllByCategory(category);
         model.addAttribute("list", list);
-        return "searchPromotion";
+        return "searchPromotionNew";
     }
 
     @GetMapping("/promotion/note")
@@ -75,7 +82,7 @@ public class SearchController {
         list.stream()
                 .sorted(Comparator.comparing(Promotion::getAverageNote));
         model.addAttribute("list", list);
-        return "searchPromotion";
+        return "searchPromotionNew";
     }
 
     //------------RESTAURACJE-------------------

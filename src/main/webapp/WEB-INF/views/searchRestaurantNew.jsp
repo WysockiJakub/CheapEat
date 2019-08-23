@@ -58,6 +58,7 @@
                                 <thead>
                                 <tr>
                                     <th>Restauracja</th>
+                                    <th>Liczba promocji</th>
                                     <th>Średnia ocena</th>
                                     <th>Liczba subskrypcji promocji</th>
                                 </tr>
@@ -73,10 +74,11 @@
                                 <c:forEach var="restaurant" items="${list}">
                                     <tr>
                                         <td>${restaurant.name}</td>
+                                        <td>${restaurant.promotions.size()}</td>
                                         <td>${restaurant.avgNote}</td>
                                             <%--            <td>${restaurant.price}</td>--%>
                                         <td>
-                                            <a href="/user/restaurant/${restaurant.id}">Zobacz</a>
+                                            <a href="/user/restaurant/${restaurant.id}/info">Zobacz</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

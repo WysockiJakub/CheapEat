@@ -43,6 +43,7 @@ public class Promotion {
     @Transient
     private int subscription;
 
+    @NotBlank
     private DayOfWeek dayOfWeek;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

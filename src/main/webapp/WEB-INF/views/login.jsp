@@ -1,40 +1,81 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Login</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CheapEat- Login</title>
+
+    <%@ include file="./fragments/head.jsp" %>
+
 </head>
 
-<body>
+<body class="bg-gradient-primary">
 
 <div class="container">
-    <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
 
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
-                   autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
-            <span>${error}</span>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                </div>
+
+                                <form class="user" method="POST" action="${contextPath}/login">
+                                    <div class="form-group ${error != null ? 'has-error' : ''}">
+                                        <div class="form-group">
+                                            <input name="username" type="text" class="form-control form-control-user" placeholder="Enter Username...">
+                                        </div>
+                                        <span>${message}</span>
+                                        <div class="form-group">
+                                            <input name="password" type="password" class="form-control form-control-user" placeholder="Password">
+                                        </div>
+                                        <span>${error}</span>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<%--                                        <div class="form-group">--%>
+<%--                                            <div class="custom-control custom-checkbox small">--%>
+<%--                                                <input type="checkbox" class="custom-control-input" id="customCheck">--%>
+<%--                                                <label class="custom-control-label" for="customCheck">Remember Me</label>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">Log In</button>
+<%--                                        <a href="index.html" class="btn btn-primary btn-user btn-block">--%>
+<%--                                            Login--%>
+<%--                                        </a>--%>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                </div>
+                                <div class="text-center">
+                                    <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<%@ include file="./fragments/jsCode.jsp" %>
+
 </body>
+
 </html>

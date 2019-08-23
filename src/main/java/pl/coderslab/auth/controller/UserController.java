@@ -11,6 +11,14 @@ import pl.coderslab.auth.model.User;
 import pl.coderslab.auth.service.SecurityService;
 import pl.coderslab.auth.service.UserService;
 import pl.coderslab.auth.validator.UserValidator;
+import pl.coderslab.promotion.Promotion;
+import pl.coderslab.promotion.PromotionRepository;
+import pl.coderslab.restaurant.Restaurant;
+import pl.coderslab.restaurant.RestaurantRepository;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -23,11 +31,17 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private PromotionRepository promotionRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
 
-        return "registration";
+        return "register";
     }
 
     @PostMapping("/registration")
@@ -35,14 +49,14 @@ public class UserController {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "register";
         }
 
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/dashboard";
+        return "redirect:/user/dashboard";
     }
 
     @GetMapping("/login")
@@ -56,8 +70,18 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping({"/user/dashboard"})
-    public String welcome(Model model) {
-        return "dashboard";
-    }
+//    @GetMapping("/user/dashboard")
+//    public String welcome(Model model) {
+////        int allPromotions = promotionRepository.findAll().size();
+////        model.addAttribute("allPromotions", allPromotions);
+////
+////        int allRestaurants = restaurantRepository.findAll().size();
+////        model.addAttribute("allRestaurants", allRestaurants);
+////
+////        LocalDate date = LocalDate.now();
+////        DayOfWeek dow = date.getDayOfWeek();
+////        List<Promotion> todayPromotions = promotionRepository.findAllByDayOfWeek(dow);
+////        model.addAttribute("todayPromotions", todayPromotions);
+//        return "dashboard2";
+//    }
 }

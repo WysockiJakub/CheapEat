@@ -13,7 +13,6 @@ import pl.coderslab.review.Review;
 import pl.coderslab.review.ReviewRepository;
 import pl.coderslab.utilities.UserUtilities;
 
-import javax.validation.Valid;
 import java.util.List;
 
 
@@ -43,13 +42,23 @@ public class PromotionController {
 
     //---------WYŚWIETL PROMOCJĘ--------------
 
-    @GetMapping("/promotion/{id}")
+    @GetMapping("/promotion/{id}/info")
     public String checkPromotion(@PathVariable Long id, Model model) {
         Promotion promotion = promotionRepository.getFirstById(id);
         promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
+        promotionService.countPromotionSubscription(promotion);                                                           //przeliczenie liczby subskrypcji promocji
 
-        int subscriptions = promotionService.countPromotionSubscription(promotion);
-        promotion.setSubscription(subscriptions);
+        model.addAttribute("promotion", promotion);
+        model.addAttribute("review", new Review());
+
+        return "promotion/promotionView";
+    }
+
+    @GetMapping("/promotion/{id}/reviews")
+    public String checkPromotionReviews(@PathVariable Long id, Model model) {
+        Promotion promotion = promotionRepository.getFirstById(id);
+        promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
+        promotionService.countPromotionSubscription(promotion);                                                           //przeliczenie liczby subskrypcji promocji
 
         model.addAttribute("favourite", false);                                                                     //sprawdzanie czy zalogowany użytkownik posiada w ulubionych aktualnie wyświetlana promocję
         if (UserUtilities.getLoggedUser(userRepository).getFavouritesPromotions().contains(promotion)) {
@@ -65,7 +74,7 @@ public class PromotionController {
         model.addAttribute("promotion", promotion);
         model.addAttribute("review", new Review());
 
-        return "promotion";
+        return "promotion/promotionView";
     }
 
     //---------WYŚWIETL LISTE ULUBIONYCH PROMOCJI---------
@@ -83,7 +92,7 @@ public class PromotionController {
     @PostMapping("/promotion/{promotionId}")
     public String addReviewToPromotion(@PathVariable Long promotionId, @ModelAttribute Review review, BindingResult result){
         if (result.hasErrors()) {
-            return "promotion";
+            return "promotion/promotion";
         }
         Promotion pr = promotionRepository.getFirstById(promotionId);
         User user = UserUtilities.getLoggedUser(userRepository);

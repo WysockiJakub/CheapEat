@@ -35,7 +35,7 @@ public class PromotionService {
         }
     }
 
-    public int countPromotionSubscription(Promotion promotion) {
+    public void countPromotionSubscription(Promotion promotion) {
         List<User> allUsers = userRepository.findAll();
         int subscription = 0;
         for(User user : allUsers) {
@@ -43,6 +43,15 @@ public class PromotionService {
                 subscription += 1;
             }
         }
-        return subscription;
+        promotion.setSubscription(subscription);
+    }
+
+    public int countPromotionSubscriptionsForRestaurant(List<Promotion> promotions) {
+        int allRestaurantSubscription = 0;
+        countPromotionAverageNoteForAllPromotions(promotions);
+        for (Promotion p : promotions) {
+            allRestaurantSubscription += p.getSubscription();
+        }
+        return allRestaurantSubscription;
     }
 }

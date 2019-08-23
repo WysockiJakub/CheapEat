@@ -42,16 +42,44 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
+                <!-- Search buttons -->
+                <div class="row">
+                    <div class="mb-4"></div>
+                    <a href="/user/search/promotion/all" class="btn btn-primary" role="button" aria-pressed="true">Wszystkie</a>
+                    <div class="mb-4"></div>
+                    <a href="/user/search/promotion/today" class="btn btn-primary" role="button" aria-pressed="true">Dzisiaj</a>
+                    <div class="mb-4"></div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dni tygodnia
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/user/search/promotion/today">Dzisiaj</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/user/search/promotion/day/1">Poniedziałek</a>
+                            <a class="dropdown-item" href="/user/search/promotion/day/2">Wtorek</a>
+                            <a class="dropdown-item" href="/user/search/promotion/day/3">Środa</a>
+                            <a class="dropdown-item" href="/user/search/promotion/day/4">Czwartek</a>
+                            <a class="dropdown-item" href="/user/search/promotion/day/5">Piątek</a>
+                            <a class="dropdown-item" href="/user/search/promotion/day/6">Sobota</a>
+                            <a class="dropdown-item" href="/user/search/promotion/day/7">Niedziela</a>
+                        </div>
+                    </div>
+                    <div class="mb-4"></div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Kategoria
+                        </button>
+                        <div class="dropdown-menu">
+                            <c:forEach var="category" items="${categories}">
+                                <a class="dropdown-item" href="/user/search/promotion/category/${category}">${category}</a>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div>
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
