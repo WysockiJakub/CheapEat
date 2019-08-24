@@ -1,13 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html;charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%
-    response.setCharacterEncoding("UTF-8");
-    request.setCharacterEncoding("UTF-8");
-%>
+<%--
+  Created by IntelliJ IDEA.
+  User: arkadiusz
+  Date: 2019-08-21
+  Time: 16:52
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +29,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <%@ include file="../fragments/sidebarRestaurateur.jsp" %>
+    <%@ include file="../fragments/sidebarUser.jsp" %>
 
 
     <!-- Content Wrapper -->
@@ -39,17 +38,12 @@
         <!-- Main Content -->
         <div id="content">
 
-            <%@ include file="../fragments/topbarRestaurateur.jsp" %>
+            <%@ include file="../fragments/topbarUser.jsp" %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Promocje restauracji</h1>
-                </div>
-
-                <!-- Content Row -->
+                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
@@ -58,23 +52,20 @@
                                 <thead>
                                 <tr>
                                     <th>Promocja</th>
-                                    <th>Ocena</th>
-                                    <th>Liczba subskrypcji</th>
+                                    <th>Cena</th>
                                     <th>Dzień promocji</th>
+                                    <th>Restauracja</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="promotion" items="${restaurantPromotionList}">
+                                <c:forEach var="promotion" items="${list}">
                                     <tr>
                                         <td>${promotion.name}</td>
-                                        <td>${promotion.averageNote}</td>
-                                        <td>${promotion.subscription}</td>
+                                        <td>${promotion.price}</td>
                                         <td>${promotion.dayOfWeek}</td>
+                                        <td>${promotion.restaurant.name}</td>
                                         <td>
-                                            <a href="/restaurateur/promotion/${promotion.id}/info">Zobacz</a>
-                                        </td>
-                                        <td>
-                                            <a href="/restaurateur/promotion/edit/${promotion.id}">Edytuj</a>
+                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

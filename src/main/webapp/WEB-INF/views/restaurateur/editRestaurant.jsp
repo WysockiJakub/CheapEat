@@ -1,81 +1,158 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: jakub
-  Date: 21.08.19
-  Time: 22:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%
+    response.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding("UTF-8");
+%>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CheapEat</title>
+
+    <%@ include file="../fragments/head.jsp" %>
+
+
 </head>
-<body>
-<div>
-    <form:form method="post" modelAttribute="restaurant">
-        <label for="nameId">Nazwa restauracji:</label>
-        <form:input type="text" path="name" id="nameId"/>
-        <form:errors path="name" element="div"/>
 
-        <br/><br/>
+<body id="page-top">
 
-        <label for="infoId">Informacje o restauracji:</label>
-        <form:input type="textarea" path="info" id="infoId" rows="3" cols="20"/>
-        <form:errors path="info" element="div"/>
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <br/><br/>
+    <%@ include file="../fragments/sidebarRestaurateur.jsp" %>
 
-        <label for="cityId">Miasto:</label>
-        <form:input type="text" path="city" id="cityId"/>
-        <form:errors path="city" element="div"/>
 
-        <br/><br/>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-        <label for="zipCodeId">Kod pocztowy:</label>
-        <form:input type="text" path="zipCode" id="zipCodeId"/>
-        <form:errors path="zipCode" element="div"/>
+        <!-- Main Content -->
+        <div id="content">
 
-        <br/><br/>
+            <%@ include file="../fragments/topbarRestaurateur.jsp" %>
 
-        <label for="streetId">Ulica:</label>
-        <form:input type="text" path="street" id="streetId"/>
-        <form:errors path="street" element="div"/>
 
-        <br/><br/>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-        <label for="houseNumberId">Numer lokalu:</label>
-        <form:input type="text" path="houseNumber" id="houseNumberId"/>
-        <form:errors path="houseNumber" element="div"/>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Edycja profilu</h1>
+                </div>
+                <form:form method="post" modelAttribute="restaurant" class="well form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="nameId" class="col-md-4 control-label">Nazwa restauracji:</label>
+                            <form:input type="text" path="name" id="nameId" class="form-control"/>
+                            <form:errors path="name" element="div"/>
+                        </div>
 
-        <br/><br/>
+                        <br/><br/>
 
-        <label for="websiteId">Strona internetowa:</label>
-        <form:input type="text" path="website" id="websiteId"/>
-        <form:errors path="website" element="div"/>
+                        <div class="form-group">
+                            <label for="infoId" class="col-md-4 control-label">Informacje o restauracji:</label>
+                            <form:textarea type="textarea" path="info" id="infoId" class="form-control" cols="10" rows="5"/>
+                            <form:errors path="info" element="div"/>
+                        </div>
 
-        <br/><br/>
+                        <br/><br/>
 
-        <label for="phoneNumberId">Numer telefonu:</label>
-        <form:input type="text" path="phoneNumber" id="phoneNumberId"/>
-        <form:errors path="phoneNumber" element="div"/>
+                        <div class="form-group">
+                            <label for="cityId" class="col-md-4 control-label">Miasto:</label>
+                            <form:input type="text" path="city" id="cityId" class="form-control"/>
+                            <form:errors path="city" element="div"/>
+                        </div>
 
-        <br/><br/>
+                        <br/><br/>
 
-        <label for="phoneNumberId">Email:</label>
-        <form:input type="text" path="email" id="emailId"/>
-        <form:errors path="email" element="div"/>
+                        <div class="form-group">
+                            <label for="zipCodeId" class="col-md-4 control-label">Kod pocztowy:</label>
+                            <form:input type="text" path="zipCode" id="zipCodeId" class="form-control"/>
+                            <form:errors path="zipCode" element="div"/>
+                        </div>
 
-        <br/><br/>
+                        <br/><br/>
 
-        <label for="phoneNumberId">Link lokalizacyjny:</label>
-        <form:input type="text" path="localizationUrl" id="emailId"/>
-        <form:errors path="email" element="div"/>
+                        <div class="form-group">
+                            <label for="streetId" class="col-md-4 control-label">Ulica:</label>
+                            <form:input type="text" path="street" id="streetId" class="form-control"/>
+                            <form:errors path="street" element="div"/>
+                        </div>
 
-        <br/><br/>
+                        <br/><br/>
 
-        <input type="submit" value="Zapisz">
-    </form:form>
+                        <div class="form-group">
+                            <label for="houseNumberId" class="col-md-4 control-label">Numer lokalu:</label>
+                            <form:input type="text" path="houseNumber" id="houseNumberId" class="form-control"/>
+                            <form:errors path="houseNumber" element="div"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <div class="form-group">
+                            <label for="websiteId" class="col-md-4 control-label">Strona internetowa:</label>
+                            <form:input type="text" path="website" id="websiteId" class="form-control"/>
+                            <form:errors path="website" element="div"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <div class="form-group">
+                            <label for="phoneNumberId" class="col-md-4 control-label">Numer telefonu:</label>
+                            <form:input type="text" path="phoneNumber" id="phoneNumberId" class="form-control"/>
+                            <form:errors path="phoneNumber" element="div"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <div class="form-group">
+                            <label for="emailId" class="col-md-4 control-label">Email:</label>
+                            <form:input type="text" path="email" id="emailId" class="form-control"/>
+                            <form:errors path="email" element="div"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <div class="form-group">
+                            <label for="localizationUrlId" class="col-md-4 control-label">Link lokalizacyjny:</label>
+                            <form:input type="text" path="localizationUrl" id="localizationUrlId" class="form-control"/>
+                            <form:errors path="localizationUrl" element="div"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <input class="btn btn-primary" type="submit" value="Zapisz"><br/><br/>
+                            ${saved}
+
+                    </fieldset>
+                </form:form>
+            </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <%@ include file="../fragments/footer.jsp" %>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
 </div>
+<!-- End of Page Wrapper -->
+
+<%@ include file="../fragments/scrollToTop.jsp" %>
+<%@ include file="../fragments/logoutModal.jsp" %>
+<%@ include file="../fragments/jsCode.jsp" %>
+
 </body>
+
 </html>

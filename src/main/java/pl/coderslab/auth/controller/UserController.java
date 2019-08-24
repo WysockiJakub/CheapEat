@@ -31,12 +31,6 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @Autowired
-    private PromotionRepository promotionRepository;
-
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
@@ -62,26 +56,12 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Twoja nazwa użytkownika lub hasło jest nieprawidłowe!");
 
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "Wylogowano użytkownika");
 
         return "login";
     }
 
-//    @GetMapping("/user/dashboard")
-//    public String welcome(Model model) {
-////        int allPromotions = promotionRepository.findAll().size();
-////        model.addAttribute("allPromotions", allPromotions);
-////
-////        int allRestaurants = restaurantRepository.findAll().size();
-////        model.addAttribute("allRestaurants", allRestaurants);
-////
-////        LocalDate date = LocalDate.now();
-////        DayOfWeek dow = date.getDayOfWeek();
-////        List<Promotion> todayPromotions = promotionRepository.findAllByDayOfWeek(dow);
-////        model.addAttribute("todayPromotions", todayPromotions);
-//        return "dashboard2";
-//    }
 }

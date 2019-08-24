@@ -1,5 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CheapEat - Register</title>
+    <title>CheapEat - Rejestracja</title>
 
     <%@ include file="./fragments/head.jsp" %>
 
@@ -29,24 +31,25 @@
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Rejestracja</h1>
                         </div>
 
                         <form:form method="POST" modelAttribute="userForm" class="user">
-                            <h2 class="form-signin-heading">Create your account</h2>
-                            <spring:bind path="username">
-                                <div class="form-control form-control-user ${status.error ? 'has-error' : ''}">
-                                    <form:input type="text" path="username" class="form-control" placeholder="Username"
-                                                autofocus="true"></form:input>
-                                    <form:errors path="username"></form:errors>
-                                </div>
-                            </spring:bind>
 
-                            <div class="form-group row">
+                            <div class="form-group">
+                            <spring:bind path="username">
+                                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                                        <form:input type="text" path="username" class="form-control form-control-user" placeholder="Nazwa użytkownika..."
+                                                    autofocus="true"></form:input>
+                                        <form:errors path="username"></form:errors>
+                                    </div>
+                                </spring:bind>
+                            </div>
+                            <div class="form-group">
 
                                 <spring:bind path="password">
                                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                                        <form:input type="password" path="password" class="form-control form-control-user" placeholder="Password"></form:input>
+                                        <form:input type="password" path="password" class="form-control form-control-user" placeholder="Hasło..."></form:input>
                                         <form:errors path="password"></form:errors>
                                     </div>
                                 </spring:bind>
@@ -54,7 +57,7 @@
                                 <spring:bind path="passwordConfirm">
                                     <div class="form-group ${status.error ? 'has-error' : ''}">
                                         <form:input type="password" path="passwordConfirm" class="form-control form-control-user"
-                                                    placeholder="Confirm your password"></form:input>
+                                                    placeholder="Powtórz hasło..."></form:input>
                                         <form:errors path="passwordConfirm"></form:errors>
                                     </div>
                                 </spring:bind>
@@ -62,13 +65,10 @@
                             <button class="btn btn-primary btn-user btn-block" type="submit">Submit</button>
                         </form:form>
 
-
                         <hr>
+
                         <div class="text-center">
-                            <a class="small" href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                        <div class="text-center">
-                            <a class="small" href="/login">Already have an account? Login!</a>
+                            <a class="small" href="/login">Masz już konto? Zaloguj się!</a>
                         </div>
                     </div>
                 </div>

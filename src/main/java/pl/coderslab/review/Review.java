@@ -1,11 +1,14 @@
 package pl.coderslab.review;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.promotion.Promotion;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,9 +19,10 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Nullable
     private Integer note;
 
+    @NotBlank
+    @Size(max = 200)
     private String content;
 
     private String username;
@@ -27,16 +31,12 @@ public class Review {
     @Column(name = "created_on")
     private LocalDateTime created;
 
-//    @ManyToOne
-//    private User user;
-
     public Review() {
     }
 
-    public Review(Integer note, String content, User user, String username) {
+    public Review(Integer note, String content, String username) {
         this.note = note;
         this.content = content;
-//        this.user = user;
         this.username = username;
     }
 
@@ -76,14 +76,6 @@ public class Review {
     public void setContent(String content) {
         this.content = content;
     }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public String getUsername() {
         return username;

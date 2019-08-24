@@ -1,12 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%
-    response.setCharacterEncoding("UTF-8");
-    request.setCharacterEncoding("UTF-8");
-%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,10 +74,7 @@
                         <a class="nav-link active" href="/user/promotion/${promotion.id}/info">Opis</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/promotion${promotion.id}/reviews">Recenzje</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Recenzje</a>
+                        <a class="nav-link" href="/user/promotion/${promotion.id}/reviews">Recenzje</a>
                     </li>
                 </ul>
 
@@ -123,56 +115,6 @@
                     </div>
 
                 </div>
-
-                <div class="form-group blue-border">
-                    <c:if test = "${addedReview == false}">
-                        <form:form method="post" modelAttribute="review">
-                            <label for="reviewId">Recenzje:</label>
-                            <form:textarea path="content" id="reviewId" class="form-control" rows="3" cols="10"/>
-                            <form:errors path="content" element="div"/>
-                            <form:select class="mdb-select md-form colorful-select dropdown-primary" path="note">
-                                <c:forEach var="number" begin="1" end="5">
-                                    <form:option value="${number}"/>
-                                </c:forEach>
-                            </form:select>
-                            <label class="mdb-main-label">Oceń</label>
-                            <input type="submit" value="Wystaw recenzję" class="btn btn-primary btn-icon-split">
-
-<%--                            <a type="submit" class="btn btn-primary btn-icon-split">--%>
-<%--                                <span class="icon text-white-50">--%>
-<%--                                  <i class="fas fa-flag"></i>--%>
-<%--                                </span>--%>
-<%--                                <span class="text">Wystaw recenzję</span>--%>
-<%--                            </a>--%>
-                        </form:form>
-                    </c:if>
-                </div>
-
-
-                <table>
-                    <div class="row">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Recenzje</h1>
-                        </div>
-                    </div>
-                    <c:forEach var="review" items="${promotion.reviews}">
-                        <tr>
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Accordion -->
-                                <a href="#reviewId" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="reviewId">
-                                    <h6 class="m-0 font-weight-bold text-primary">${review.username} -----  ocena: ${review.note}</h6>
-                                </a>
-                                <!-- Card Content - Collapse -->
-                                <div class="collapse show" id="reviewId">
-                                    <div class="card-body">
-                                        <strong>Treść recenzji:</strong><br/><br/>
-                                        ${review.content}
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                    </c:forEach>
-                </table>
 
             </div>
             <!-- /.container-fluid -->

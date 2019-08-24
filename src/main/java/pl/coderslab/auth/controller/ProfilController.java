@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.auth.model.User;
 import pl.coderslab.auth.model.UserDetails;
 import pl.coderslab.auth.repository.UserDetailsRepository;
 import pl.coderslab.auth.repository.UserRepository;
@@ -43,16 +42,18 @@ public class ProfilController {
         UserDetails userDetails = UserUtilities.getLoggedUser(userRepository).getUserDetails();
         model.addAttribute("userDetails", userDetails);
 
-        return "editUserDetails";
+        return "user/editUserDetails";
     }
 
     @PostMapping("/edit")
-    public String editUserProfilePost(@ModelAttribute UserDetails userDetails, BindingResult result) {
+    public String editUserProfilePost(@ModelAttribute UserDetails userDetails, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "editUserDetails";
+            return "user/editUserDetails";
+        } else {
+            model.addAttribute("saved", "Zapisano pomyslnie");
         }
         userDetails.setId(UserUtilities.getLoggedUser(userRepository).getUserDetails().getId());
         userDetailsRepository.save(userDetails);
-        return "redirect:/user/profil";
+        return "user/editUserDetails";
     }
 }

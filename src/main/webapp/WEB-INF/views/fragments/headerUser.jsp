@@ -13,7 +13,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/user/profil">Profil</a>
-                    <a class="dropdown-item" href="/user/promotion/favouritePromotions">Moje promocje</a>
+                    <a class="dropdown-item" href="/user/promotion/favourite">Moje promocje</a>
                     <a class="dropdown-item" href="#">Ulubione promocje</a>
                     <div class="dropdown-divider"></div>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">

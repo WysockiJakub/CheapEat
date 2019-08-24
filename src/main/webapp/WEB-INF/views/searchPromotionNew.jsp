@@ -107,11 +107,10 @@
                                         <td>${promotion.dayOfWeek}</td>
                                         <td>${promotion.restaurant.name}</td>
                                         <td>
-                                            <a href="/user/promotion/${promotion.id}">Zobacz</a>
+                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                </tbody>
                                 </tbody>
                             </table>
                         </div>

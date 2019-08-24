@@ -12,6 +12,8 @@ import pl.coderslab.promotion.PromotionRepository;
 import pl.coderslab.promotion.PromotionService;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.restaurant.RestaurantRepository;
+import pl.coderslab.restaurant.RestaurantService;
+import pl.coderslab.review.ReviewService;
 import pl.coderslab.utilities.UserUtilities;
 
 import javax.servlet.http.HttpSession;
@@ -28,13 +30,17 @@ public class RestaurateurController {
     private PromotionRepository promotionRepository;
     private RestaurantRepository restaurantRepository;
     private PromotionService promotionService;
+    private RestaurantService restaurantService;
+    private ReviewService reviewService;
 
     @Autowired
-    public RestaurateurController(UserRepository userRepository, PromotionRepository promotionRepository, RestaurantRepository restaurantRepository, PromotionService promotionService) {
+    public RestaurateurController(UserRepository userRepository, PromotionRepository promotionRepository, RestaurantRepository restaurantRepository, PromotionService promotionService, RestaurantService restaurantService, ReviewService reviewService) {
         this.userRepository = userRepository;
         this.promotionRepository = promotionRepository;
         this.restaurantRepository = restaurantRepository;
         this.promotionService = promotionService;
+        this.restaurantService = restaurantService;
+        this.reviewService = reviewService;
     }
 
     @ModelAttribute(name = "categories")
@@ -55,12 +61,22 @@ public class RestaurateurController {
 //    }
 
     @GetMapping("/dashboard")
-    public String restaurateurDashboard(HttpSession sess) {
+    public String restaurateurDashboard(Model model, HttpSession session) {
         Restaurant restaurant = UserUtilities.getLoggedUser(userRepository).getRestaurant();
-        sess.setAttribute("restaurant", restaurant);
-        return "restaurateur/restaurateurDashboard";
-    }
+        session.setAttribute("restaurant", restaurant);
+        restaurantService.countAvgRestaurantNote(restaurant);
+        model.addAttribute("restaurant", restaurant);
 
+        int allRestaurantSubscription = promotionService.countPromotionSubscriptionsForRestaurant(restaurant.getPromotions());
+        model.addAttribute("allRestaurantSubscription", allRestaurantSubscription);
+
+        int allRestaurantReviews = reviewService.countRestaurantAllReviews(restaurant.getPromotions());
+        model.addAttribute("allRestaurantReviews", allRestaurantReviews);
+
+        restaurantService.saveToModelNotes(restaurant.getPromotions(), model);
+
+        return "restaurateurDashboard";
+    }
 
 
     //----------PROFIL RESTAURACJI-------------
@@ -83,9 +99,11 @@ public class RestaurateurController {
     }
 
     @PostMapping("/restaurant/edit")
-    public String editRestaurantProfilePost(@ModelAttribute @Valid Restaurant request, BindingResult result) {
+    public String editRestaurantProfilePost(@ModelAttribute @Valid Restaurant request, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "restaurateur/editRestaurant";
+        } else {
+            model.addAttribute("saved", "Zapisano pomyslnie");
         }
         Restaurant restaurant = restaurantRepository.findByUserId(UserUtilities.getLoggedUser(userRepository).getId());
         restaurant.setName(request.getName());
@@ -98,7 +116,7 @@ public class RestaurateurController {
         restaurant.setEmail(request.getEmail());
         restaurant.setPhoneNumber(request.getPhoneNumber());
         restaurantRepository.save(restaurant);
-        return "redirect:/restaurateur/restaurant/profil";
+        return "restaurateur/editRestaurant";
     }
 
     //---------LISTA PROMOCJI ZALOGOWANEJ RESTAURACJI-------------
@@ -106,6 +124,8 @@ public class RestaurateurController {
     @GetMapping("/promotion/list")
     public String showLoggedRestaurantPromotions(Model model) {
         List<Promotion> restaurantPromotionList = UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions();
+        promotionService.countPromotionAverageNoteForAllPromotions(restaurantPromotionList);
+        promotionService.countPromotionSubscriptionsForRestaurant(restaurantPromotionList);
         model.addAttribute("restaurantPromotionList", restaurantPromotionList);
         return "restaurateur/restaurantPromotionList";
     }

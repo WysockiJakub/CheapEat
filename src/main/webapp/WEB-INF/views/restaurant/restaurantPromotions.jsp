@@ -73,19 +73,11 @@
                                 <thead>
                                 <tr>
                                     <th>Promocja</th>
-                                    <th>Cena</th>
-                                    <th>Dzień promocji</th>
-                                    <th>Restauracja</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Promocja</th>
                                     <th>Ocena</th>
                                     <th>Cena</th>
-                                    <th>Dzień promocji</th>
+                                    <th>Dzień tygodnia</th>
                                 </tr>
-                                </tfoot>
+                                </thead>
                                 <tbody>
                                 <c:forEach var="promotion" items="${promotions}">
                                     <tr>
@@ -94,7 +86,7 @@
                                         <td>${promotion.price}</td>
                                         <td>${promotion.dayOfWeek}</td>
                                         <td>
-                                            <a href="/user/promotion/${promotion.id}">Zobacz</a>
+                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

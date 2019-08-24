@@ -1,8 +1,11 @@
 package pl.coderslab.restaurant;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import pl.coderslab.promotion.Promotion;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +17,36 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(max = 30, min = 2)
     private String name;
 
+    @Size(max = 500)
     private String info;
 
+    @NotBlank
+    @Size(max = 20)
     private String city;
+
+    @NotBlank
     private String street;
+
+    @NotBlank
+    @Size(max = 4)
     private String houseNumber;
+
+    @NotBlank
     private String zipCode;
 
+    @NotBlank
     private String website;
 
+    @NotBlank
+    @Size(max=15)
     private String phoneNumber;
 
+    @NotBlank
+    @Email
     private String email;
 
     @Transient

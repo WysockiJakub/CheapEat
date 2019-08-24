@@ -13,7 +13,12 @@ import pl.coderslab.review.Review;
 import pl.coderslab.review.ReviewRepository;
 import pl.coderslab.utilities.UserUtilities;
 
+import javax.validation.Valid;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -48,10 +53,14 @@ public class PromotionController {
         promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
         promotionService.countPromotionSubscription(promotion);                                                           //przeliczenie liczby subskrypcji promocji
 
-        model.addAttribute("promotion", promotion);
-        model.addAttribute("review", new Review());
+        model.addAttribute("favourite", false);                                                                     //sprawdzanie czy zalogowany użytkownik posiada w ulubionych aktualnie wyświetlana promocję
+        if (UserUtilities.getLoggedUser(userRepository).getFavouritesPromotions().contains(promotion)) {
+            model.addAttribute("favourite", true);
+        }
 
-        return "promotion/promotionView";
+        model.addAttribute("promotion", promotion);
+
+        return "promotion/promotionInfo";
     }
 
     @GetMapping("/promotion/{id}/reviews")
@@ -68,31 +77,63 @@ public class PromotionController {
         for (Review review : promotion.getReviews()) {
             if (review.getUsername().equals(UserUtilities.getLoggedUser(userRepository).getUsername())) {
                 model.addAttribute("addedReview", true);
+                model.addAttribute("userReview", review);
                 break;
             }
         }
         model.addAttribute("promotion", promotion);
         model.addAttribute("review", new Review());
 
-        return "promotion/promotionView";
+        return "promotion/promotionReviews";
     }
 
     //---------WYŚWIETL LISTE ULUBIONYCH PROMOCJI---------
 
-    @GetMapping("/promotion/favouritePromotions")
-    public String search(Model model) {
+    @GetMapping("/promotion/favourite/all")
+    public String showAllFavouritePromotions(Model model) {
         User user = UserUtilities.getLoggedUser(userRepository);
         List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
-        model.addAttribute("userFavouritePromotions", userFavouritePromotions);
-        return "favouritePromotionsList";
+        model.addAttribute("list", userFavouritePromotions);
+        return "user/favouritePromotions";
+    }
+
+    @GetMapping("/promotion/favourite/today")
+    public String showTodayFavouritePromotions(Model model) {
+        LocalDate date = LocalDate.now();
+        DayOfWeek dow = date.getDayOfWeek();
+        User user = UserUtilities.getLoggedUser(userRepository);
+        List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
+        List<Promotion> todayFavouritePromotions = userFavouritePromotions.stream()
+                .filter(p -> p.getDayOfWeek() == dow)
+                .collect(Collectors.toList());
+
+
+        model.addAttribute("list", todayFavouritePromotions);
+        return "user/favouritePromotions";
+    }
+
+    @GetMapping("/promotion/favourite/day")
+    public String showFavouritePromotionsByDayOfWeek(Model model) {
+        User user = UserUtilities.getLoggedUser(userRepository);
+        List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
+        promotionService.addToModelFavouritePromotionsByDayOfWeek(userFavouritePromotions, model);
+        return "user/favouritePromotionsDay";
+    }
+
+    @GetMapping("/promotion/favourite/category")
+    public String showFavouritePromotionsByCategory(Model model) {
+        User user = UserUtilities.getLoggedUser(userRepository);
+        List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
+        promotionService.addToModelFavouritePromotionsByCategory(userFavouritePromotions, model);
+        return "user/favouritePromotionsCategory";
     }
 
     //---------DODAJ RECENZJE DO PROMOCJI-----------------
 
-    @PostMapping("/promotion/{promotionId}")
-    public String addReviewToPromotion(@PathVariable Long promotionId, @ModelAttribute Review review, BindingResult result){
+    @PostMapping("/promotion/{promotionId}/reviews")
+    public String addReviewToPromotion(@PathVariable Long promotionId, @ModelAttribute @Valid Review review, BindingResult result){
         if (result.hasErrors()) {
-            return "promotion/promotion";
+            return "promotion/promotionReviews";
         }
         Promotion pr = promotionRepository.getFirstById(promotionId);
         User user = UserUtilities.getLoggedUser(userRepository);
@@ -100,7 +141,7 @@ public class PromotionController {
         reviewRepository.save(review);
         pr.addToReviews(review);
         promotionRepository.save(pr);
-        return "redirect:/user/promotion/" + promotionId;
+        return "promotion/promotionReviews";
     }
 
     //-----------DODAJ PROMOCJĘ DO ULUBIONYCH--------------
@@ -112,7 +153,7 @@ public class PromotionController {
         Promotion promotion = promotionRepository.getFirstById(id);
         user.addFavouritePromotion(promotion);
         userRepository.save(user);
-        return "redirect:/user/promotion/" + id;
+        return "redirect:/user/promotion/" + id + "/info";
     }
 
     @GetMapping("/promotion/deleteFromFavourite/{id}")
@@ -121,7 +162,7 @@ public class PromotionController {
         Promotion promotion = promotionRepository.getFirstById(id);
         user.deleteFavouritePromotion(promotion);
         userRepository.save(user);
-        return "redirect:/user/promotion/" + id;
+        return "redirect:/user/promotion/" + id + "/info";
     }
 
 
