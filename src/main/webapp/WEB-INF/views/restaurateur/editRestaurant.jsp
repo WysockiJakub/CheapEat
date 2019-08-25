@@ -58,7 +58,7 @@
                             <form:errors path="name" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="infoId" class="col-md-4 control-label">Informacje o restauracji:</label>
@@ -66,7 +66,7 @@
                             <form:errors path="info" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="cityId" class="col-md-4 control-label">Miasto:</label>
@@ -74,7 +74,7 @@
                             <form:errors path="city" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="zipCodeId" class="col-md-4 control-label">Kod pocztowy:</label>
@@ -82,7 +82,7 @@
                             <form:errors path="zipCode" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="streetId" class="col-md-4 control-label">Ulica:</label>
@@ -90,7 +90,7 @@
                             <form:errors path="street" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="houseNumberId" class="col-md-4 control-label">Numer lokalu:</label>
@@ -98,7 +98,7 @@
                             <form:errors path="houseNumber" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="websiteId" class="col-md-4 control-label">Strona internetowa:</label>
@@ -106,7 +106,7 @@
                             <form:errors path="website" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="phoneNumberId" class="col-md-4 control-label">Numer telefonu:</label>
@@ -114,7 +114,7 @@
                             <form:errors path="phoneNumber" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="emailId" class="col-md-4 control-label">Email:</label>
@@ -122,7 +122,7 @@
                             <form:errors path="email" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <div class="form-group">
                             <label for="localizationUrlId" class="col-md-4 control-label">Link lokalizacyjny:</label>
@@ -130,7 +130,7 @@
                             <form:errors path="localizationUrl" element="div"/>
                         </div>
 
-                        <br/><br/>
+                        <br/>
 
                         <input class="btn btn-primary" type="submit" value="Zapisz"><br/><br/>
                             ${saved}

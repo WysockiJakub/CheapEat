@@ -1,58 +1,123 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>CheapEat</title>
-    <%@ include file="./../fragments/head.jsp" %>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Cards</title>
+
+    <%@ include file="../fragments/head.jsp" %>
+
 </head>
-<body>
-<%@ include file="./../fragments/headerRestarateur.jsp" %>
 
-<table>
-    <tr>
-        <td>Nazwa użytkownika:</td>
-        <td>${restaurant.name}</td>
-    </tr>
-    <tr>
-        <td>Email:</td>
-        <td>${restaurant.email}</td>
-    </tr>
-    <tr>
-        <td>Numer kontaktowy:</td>
-        <td>${restaurant.phoneNumber}</td>
-    </tr>
-    <tr>
-        <td>Strona internetowa:</td>
-        <td>${restaurant.website}</td>
-    </tr>
-    <tr>
-        <td>Miasto:</td>
-        <td>${restaurant.city}</td>
-    </tr>
-    <tr>
-        <td>Kod pocztowy:</td>
-        <td>${restaurant.zipCode}</td>
-    </tr>
-    <tr>
-        <td>Ulica:</td>
-        <td>${restaurant.street}</td>
-    </tr>
-    <tr>
-        <td>Numer lokalu:</td>
-        <td>${restaurant.houseNumber}</td>
-    </tr>
-    <tr>
-        <td>Lokalizacja:</td>
-        <div>
-            <iframe width="400" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${restaurant.localizationUrl}" style="border: 1px solid black"></iframe>
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <%@ include file="../fragments/sidebarRestaurateur.jsp" %>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <%@ include file="../fragments/topbarRestaurateur.jsp" %>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+
+                <div class="row">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">${restaurant.name}</h1>
+                    </div>
+                </div>
+
+                <%@ include file="../fragments/restaurantHeader.jsp" %>
+
+                <div class="row">
+
+                    <div class="col-sm">
+
+                        <!-- Basic Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Opis</h6>
+                            </div>
+                            <div class="card-body">
+                                ${restaurant.info}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm">
+
+                        <!-- Basic Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Kontakt</h6>
+                            </div>
+                            <div class="card-body">
+                                <strong>Miasto: </strong>${restaurant.city}, ${restaurant.zipCode}<br/><br/>
+                                <strong>Ulica: </strong>${restaurant.street} ${restaurant.houseNumber}<br/><br/>
+                                <strong>Numer telefonu: </strong>${restaurant.phoneNumber}<br/><br/>
+                                <strong>Email: </strong>${restaurant.email}<br/><br/>
+                                <strong>Strona internetowa: </strong><a href="${restaurant.website}">${restaurant.website}</a><br/><br/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm">
+
+                        <!-- Basic Card Example -->
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Lokalizacja</h6>
+                            </div>
+                            <div>
+                                <iframe width="400" height="275" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${restaurant.localizationUrl}"></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
         </div>
-    </tr>
-</table>
-<a href="/restaurateur/restaurant/edit">Edytuj</a>
+        <!-- End of Main Content -->
 
+        <!-- Footer -->
+        <%@ include file="../fragments/footer.jsp" %>
+        <!-- End of Footer -->
 
-<%@ include file="./../fragments/jsCode.jsp" %>
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<%@ include file="../fragments/scrollToTop.jsp" %>
+<%@ include file="../fragments/logoutModal.jsp" %>
+<%@ include file="../fragments/jsCode.jsp" %>
+
 </body>
+
 </html>

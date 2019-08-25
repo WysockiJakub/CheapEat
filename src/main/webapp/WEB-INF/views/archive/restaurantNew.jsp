@@ -20,7 +20,7 @@
 
     <title>SB Admin 2 - Cards</title>
 
-    <%@ include file="./fragments/head.jsp" %>
+    <%@ include file="../fragments/head.jsp" %>
 
 </head>
 
@@ -29,7 +29,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <%@ include file="./fragments/sidebarUser.jsp" %>
+    <%@ include file="../fragments/sidebarUser.jsp" %>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -37,7 +37,7 @@
         <!-- Main Content -->
         <div id="content">
 
-            <%@ include file="./fragments/topbarUser.jsp" %>
+            <%@ include file="../fragments/topbarUser.jsp" %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -240,7 +240,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <%@ include file="./fragments/footer.jsp" %>
+        <%@ include file="../fragments/footer.jsp" %>
         <!-- End of Footer -->
 
     </div>
@@ -249,9 +249,9 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<%@ include file="./fragments/scrollToTop.jsp" %>
-<%@ include file="./fragments/logoutModal.jsp" %>
-<%@ include file="./fragments/jsCode.jsp" %>
+<%@ include file="../fragments/scrollToTop.jsp" %>
+<%@ include file="../fragments/logoutModal.jsp" %>
+<%@ include file="../fragments/jsCode.jsp" %>
 
 </body>
 

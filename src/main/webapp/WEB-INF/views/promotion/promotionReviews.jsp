@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Cards</title>
+    <title>CheapEat</title>
 
     <%@ include file="../fragments/head.jsp" %>
 
@@ -82,8 +82,10 @@
                     <c:choose>
                         <c:when test="${addedReview == false}">
                             <form:form method="post" modelAttribute="review">
-                                <label for="reviewId">Recenzje:</label>
+                                <label for="reviewId"></label>
                                 <form:textarea path="content" id="reviewId" class="form-control" rows="3" cols="10" placeholder="Treść recenzji (maksymalnie 200 znaków)"/>
+                                <form:errors path="content" element="div"/>
+
                                 <form:select class="mdb-select md-form colorful-select dropdown-primary" path="note">
                                     <c:forEach var="number" begin="1" end="5">
                                         <form:option value="${number}"/>
@@ -92,7 +94,6 @@
                                 <label class="mdb-main-label">Oceń</label>
 <%--                                <input type="submit" value="Wystaw recenzję" class="btn btn-primary btn-icon-split">--%>
                                 <button type="submit" class="btn btn-primary">Wystaw recenzję</button>
-                                <form:errors path="content" element="div"/>
                             </form:form>
                         </c:when>
                         <c:otherwise>

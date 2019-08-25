@@ -2,12 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html;charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%
-    response.setCharacterEncoding("UTF-8");
-    request.setCharacterEncoding("UTF-8");
-%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,14 +13,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CheapEat</title>
-    <script>
-        function confirmDelete(id, name) {
-            if (confirm("Czy na pewno usunąć promocję \"" + name + "\"")) {
-                window.location.href = "/restaurateur/promotion/delete/" + id
-            }
-        }
-    </script>
+    <title>SB Admin 2 - Cards</title>
+
     <%@ include file="../fragments/head.jsp" %>
 
 </head>
@@ -37,7 +25,6 @@
 <div id="wrapper">
 
     <%@ include file="../fragments/sidebarRestaurateur.jsp" %>
-
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -51,11 +38,24 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Promocje restauracji</h1>
+
+                <div class="row">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">${promotion.name}</h1>
+                    </div>
                 </div>
 
-                <!-- Content Row -->
+                <%@ include file="../fragments/promotionHeader.jsp" %>
+
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/restaurateur/promotion/${promotion.id}/info">Opis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/restaurateur/promotion/${promotion.id}/reviews">Recenzje</a>
+                    </li>
+                </ul>
+
                 <div class="card shadow mb-4">
 
                     <div class="card-body">
@@ -63,28 +63,19 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Promocja</th>
+                                    <th>Użytkownik</th>
+                                    <th>Treść recenzji</th>
                                     <th>Ocena</th>
-                                    <th>Liczba subskrypcji</th>
-                                    <th>Dzień promocji</th>
+                                    <th>Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="promotion" items="${restaurantPromotionList}">
+                                <c:forEach var="review" items="${promotion.reviews}">
                                     <tr>
-                                        <td>${promotion.name}</td>
-                                        <td>${promotion.averageNote}</td>
-                                        <td>${promotion.subscription}</td>
-                                        <td>${promotion.dayOfWeek}</td>
-                                        <td>
-                                            <a href="/restaurateur/promotion/${promotion.id}/info">Zobacz</a>
-                                        </td>
-                                        <td>
-                                            <a href="/restaurateur/promotion/edit/${promotion.id}">Edytuj</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" onclick="confirmDelete(${promotion.id}, '${promotion.name}')">Usuń</a>
-                                        </td>
+                                        <td>${review.username}</td>
+                                        <td>${review.content}</td>
+                                        <td>${review.note}</td>
+                                        <td>${review.created}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -99,7 +90,9 @@
         </div>
         <!-- End of Main Content -->
 
+        <!-- Footer -->
         <%@ include file="../fragments/footer.jsp" %>
+        <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->

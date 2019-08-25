@@ -10,8 +10,11 @@ import pl.coderslab.auth.model.Role;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.auth.repository.RoleRepository;
 import pl.coderslab.auth.repository.UserRepository;
+import pl.coderslab.promotion.PromotionRepository;
 import pl.coderslab.restaurant.Restaurant;
 import pl.coderslab.restaurant.RestaurantRepository;
+import pl.coderslab.review.ReviewRepository;
+import pl.coderslab.utilities.UserUtilities;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
@@ -26,18 +29,39 @@ public class AdminController {
     private RestaurantRepository restaurantRepository;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private PromotionRepository promotionRepository;
+    private ReviewRepository reviewRepository;
 
     @Autowired
-    public AdminController(BCryptPasswordEncoder bCryptPasswordEncoder, RestaurantRepository restaurantRepository, UserRepository userRepository, RoleRepository roleRepository) {
+    public AdminController(BCryptPasswordEncoder bCryptPasswordEncoder, RestaurantRepository restaurantRepository, UserRepository userRepository, RoleRepository roleRepository, PromotionRepository promotionRepository, ReviewRepository reviewRepository) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.promotionRepository = promotionRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/dashboard")
-    public String adminDashboard(){
-    return "admin/adminDashboard";
+    public String adminDashboard(Model model){
+        int allPromotions = promotionRepository.findAll().size();
+        model.addAttribute("allPromotions", allPromotions);
+
+        int allRestaurants = restaurantRepository.findAll().size();
+        model.addAttribute("allRestaurants", allRestaurants);
+
+        int allReviews = reviewRepository.findAll().size();
+        if (allReviews != 0) {
+            model.addAttribute("allReviews", allReviews);
+        } else {
+            model.addAttribute("allReviews", 0);
+        }
+
+        int allUsers = UserUtilities.countUsers(userRepository) - 1;
+        model.addAttribute("allUsers",allUsers);
+
+
+        return "admin/adminDashboard";
     }
 
     @GetMapping("/restaurant/add/user")

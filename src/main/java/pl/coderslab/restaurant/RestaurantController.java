@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.promotion.Promotion;
 import pl.coderslab.promotion.PromotionService;
+import pl.coderslab.review.ReviewService;
 
 import java.util.List;
 
@@ -18,12 +19,14 @@ public class RestaurantController {
     private RestaurantRepository restaurantRepository;
     private RestaurantService restaurantService;
     private PromotionService promotionService;
+    private ReviewService reviewService;
 
     @Autowired
-    public RestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService, PromotionService promotionService) {
+    public RestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService, PromotionService promotionService, ReviewService reviewService) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantService = restaurantService;
         this.promotionService = promotionService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping("/{id}/info")
@@ -37,6 +40,9 @@ public class RestaurantController {
 
         int subscriptions = promotionService.countPromotionSubscriptionsForRestaurant(promotions);
         model.addAttribute("subscriptions", subscriptions);
+
+        int allReviews = reviewService.countRestaurantAllReviews(promotions);
+        model.addAttribute("allReviews", allReviews);
         return "restaurant/restaurantInfo";
     }
 
@@ -51,6 +57,9 @@ public class RestaurantController {
 
         int subscriptions = promotionService.countPromotionSubscriptionsForRestaurant(promotions);
         model.addAttribute("subscriptions", subscriptions);
+
+        int allReviews = reviewService.countRestaurantAllReviews(promotions);
+        model.addAttribute("allReviews", allReviews);
 
         return "restaurant/restaurantPromotions";
     }

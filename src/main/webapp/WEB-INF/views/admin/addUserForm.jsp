@@ -1,39 +1,90 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: jakub
-  Date: 14.08.19
-  Time: 15:36
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Title</title>
-    <%@ include file="./../fragments/head.jsp" %>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CheapEat</title>
+
+    <%@ include file="../fragments/head.jsp" %>
 
 </head>
-<body>
-<%@ include file="./../fragments/headerAdmin.jsp" %>
 
-<div>
-    <form:form method="post" modelAttribute="user">
-        <label for="nameId">Nazwa użytkownika:</label>
-        <form:input type="text" path="username" id="nameId"/>
-        <form:errors path="username" element="div"/>
+<body id="page-top">
 
-        <br/><br/>
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <label for="passwordId">Hasło:</label>
-        <form:input type="password" path="password" id="passwordId"/>
-        <form:errors path="password" element="div"/>
+    <%@ include file="../fragments/sidebarAdmin.jsp" %>
 
-        <br/><br/>
 
-        <input type="submit" value="Dalej">
-    </form:form>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <%@ include file="../fragments/topbarRestaurateur.jsp" %>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dodaj użytkownika</h1>
+                </div>
+
+                <form:form method="post" modelAttribute="user" class="well form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="usernameId" class="col-md-4 control-label">Nazwa użytkownika:</label>
+                            <form:input type="text" path="username" id="usernameId" class="form-control" placeholder="Od 6 do 32 znaków..."/>
+                            <form:errors path="username" element="div"/>
+                        </div>
+
+                        <br/>
+
+                        <div class="form-group">
+                            <label for="passwordId" class="col-md-4 control-label">Hasło:</label>
+                            <form:input type="password" path="password" id="passwordId" class="form-control" placeholder="Od 8 do 32 znaków..."/>
+                            <form:errors path="password" element="div"/>
+                        </div>
+
+                        <br/>
+
+                        <input class="btn btn-primary" type="submit" value="Dodaj użytkownika"><br/><br/>
+
+                    </fieldset>
+                </form:form>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <%@ include file="../fragments/footer.jsp" %>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
 </div>
-<%@ include file="./../fragments/jsCode.jsp" %>
+<!-- End of Page Wrapper -->
+
+<%@ include file="../fragments/scrollToTop.jsp" %>
+<%@ include file="../fragments/logoutModal.jsp" %>
+<%@ include file="../fragments/jsCode.jsp" %>
 
 </body>
+
 </html>

@@ -7,6 +7,8 @@ import pl.coderslab.auth.model.LoggedUser;
 import pl.coderslab.auth.model.User;
 import pl.coderslab.auth.repository.UserRepository;
 
+import java.util.List;
+
 public class UserUtilities {
 
     public static String getLoggedUsername() {
@@ -43,4 +45,16 @@ public class UserUtilities {
         loggedUser.setId(user.getId());
         loggedUser.setUsername(user.getUsername());
     }
+
+    public static int countUsers(UserRepository userRepository) {
+        List<User> users = userRepository.findAll();
+        int simpleUsers = 0;
+        for (User u : users) {
+            if (u.getRestaurant() == null) {
+                simpleUsers += 1;
+            }
+        }
+        return simpleUsers;
+    }
+
 }

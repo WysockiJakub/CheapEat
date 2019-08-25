@@ -1,5 +1,6 @@
 package pl.coderslab.auth.model;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.lang.Nullable;
 import pl.coderslab.promotion.Promotion;
 import pl.coderslab.restaurant.Restaurant;
@@ -22,8 +23,8 @@ public class User {
 
     private String password;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private UserDetails userDetails;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private UserDetails userDetails = new UserDetails();
 
     @Transient
     private String passwordConfirm;

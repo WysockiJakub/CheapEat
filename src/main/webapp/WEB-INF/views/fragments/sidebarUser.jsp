@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -82,7 +83,6 @@
                 <h6 class="collapse-header">Według:</h6>
                 <a class="collapse-item" href="/user/promotion/favourite/day">Dnia</a>
                 <a class="collapse-item" href="/user/promotion/favourite/category">Kategorii</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
 
             </div>
         </div>
@@ -90,6 +90,12 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    <li class="nav-item">
+        <a class="nav-link" href="/user/about">
+            <i class="fas fa-fw fa-table"></i>
+            <span>O aplikacji</span></a>
+    </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

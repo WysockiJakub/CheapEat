@@ -94,6 +94,7 @@ public class PromotionController {
         User user = UserUtilities.getLoggedUser(userRepository);
         List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
         model.addAttribute("list", userFavouritePromotions);
+        model.addAttribute("header", "Wszystkie ulubione promocje");
         return "user/favouritePromotions";
     }
 
@@ -107,7 +108,7 @@ public class PromotionController {
                 .filter(p -> p.getDayOfWeek() == dow)
                 .collect(Collectors.toList());
 
-
+        model.addAttribute("header", "Dzisiejsze ulubione promocje");
         model.addAttribute("list", todayFavouritePromotions);
         return "user/favouritePromotions";
     }
@@ -131,8 +132,27 @@ public class PromotionController {
     //---------DODAJ RECENZJE DO PROMOCJI-----------------
 
     @PostMapping("/promotion/{promotionId}/reviews")
-    public String addReviewToPromotion(@PathVariable Long promotionId, @ModelAttribute @Valid Review review, BindingResult result){
+    public String addReviewToPromotion(Model model, @PathVariable Long promotionId, @ModelAttribute @Valid Review review, BindingResult result){
         if (result.hasErrors()) {
+            Promotion promotion = promotionRepository.getFirstById(promotionId);
+            promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
+            promotionService.countPromotionSubscription(promotion);
+
+            model.addAttribute("favourite", false);                                                                     //sprawdzanie czy zalogowany użytkownik posiada w ulubionych aktualnie wyświetlana promocję
+            if (UserUtilities.getLoggedUser(userRepository).getFavouritesPromotions().contains(promotion)) {
+                model.addAttribute("favourite", true);
+            }
+
+            model.addAttribute("addedReview",false);
+            for (Review r : promotion.getReviews()) {
+                if (review.getUsername().equals(UserUtilities.getLoggedUser(userRepository).getUsername())) {
+                    model.addAttribute("addedReview", true);
+                    break;
+                }
+            }
+
+            model.addAttribute("addedReview",false);
+            model.addAttribute("promotion", promotion);
             return "promotion/promotionReviews";
         }
         Promotion pr = promotionRepository.getFirstById(promotionId);
@@ -141,7 +161,7 @@ public class PromotionController {
         reviewRepository.save(review);
         pr.addToReviews(review);
         promotionRepository.save(pr);
-        return "promotion/promotionReviews";
+        return "redirect:/user/promotion/" + promotionId + "/reviews";
     }
 
     //-----------DODAJ PROMOCJĘ DO ULUBIONYCH--------------

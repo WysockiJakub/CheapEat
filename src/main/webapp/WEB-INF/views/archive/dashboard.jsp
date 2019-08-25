@@ -5,10 +5,10 @@
 <html>
 <head>
     <title>CheapEat</title>
-    <%@ include file="./fragments/head.jsp" %>
+    <%@ include file="../fragments/head.jsp" %>
 </head>
 <body>
-    <%@ include file="./fragments/headerUser.jsp" %>
+    <%@ include file="../fragments/headerUser.jsp" %>
 
     <section class="padding-large bg-light">
         <div id="carouselExampleControls" class="carousel slide main-slider" data-ride="carousel">
@@ -52,6 +52,6 @@
         </div>
     </section>
 
-    <%@ include file="./fragments/jsCode.jsp" %>
+    <%@ include file="../fragments/jsCode.jsp" %>
 </body>
 </html>

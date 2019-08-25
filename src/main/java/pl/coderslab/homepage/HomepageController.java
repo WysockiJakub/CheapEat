@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import pl.coderslab.auth.repository.UserRepository;
 import pl.coderslab.promotion.Promotion;
 import pl.coderslab.promotion.PromotionRepository;
 import pl.coderslab.restaurant.RestaurantRepository;
 import pl.coderslab.review.ReviewRepository;
+import pl.coderslab.utilities.UserUtilities;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -21,12 +24,13 @@ public class HomepageController {
     private PromotionRepository promotionRepository;
     private RestaurantRepository restaurantRepository;
     private ReviewRepository reviewRepository;
+    private UserRepository userRepository;
 
-    @Autowired
-    public HomepageController(PromotionRepository promotionRepository, RestaurantRepository restaurantRepository, ReviewRepository reviewRepository) {
+    public HomepageController(PromotionRepository promotionRepository, RestaurantRepository restaurantRepository, ReviewRepository reviewRepository, UserRepository userRepository) {
         this.promotionRepository = promotionRepository;
         this.restaurantRepository = restaurantRepository;
         this.reviewRepository = reviewRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/user/dashboard")
@@ -44,7 +48,8 @@ public class HomepageController {
             model.addAttribute("allReviews", 0);
         }
 
-
+        int allUsers = UserUtilities.countUsers(userRepository) - 1;
+        model.addAttribute("allUsers",allUsers);
 
         LocalDate date = LocalDate.now();
         DayOfWeek dow = date.getDayOfWeek();
@@ -61,4 +66,10 @@ public class HomepageController {
 
         return "dashboard2";
     }
+
+    @GetMapping("/user/about")
+    public String about() {
+        return "about";
+    }
+
 }

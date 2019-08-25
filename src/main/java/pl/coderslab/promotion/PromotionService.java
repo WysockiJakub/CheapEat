@@ -28,7 +28,7 @@ public class PromotionService {
 
     @ModelAttribute(name = "categories")
     List<String> categories() {
-        return Arrays.asList("Dania wegetarianskie", "Chinszczyzna", "Owoce morza", "Nalesniki", "Obiady domowe", "Kebab", "Burgery", "Pierogi", "Sushi", "Makarony", "Salatki", "Ramen", "Pizza", "Alkohole");
+        return Arrays.asList("Dania wegetariańskie", "Chińszczyzna", "Owoce morza", "Naleśniki", "Obiady domowe", "Kebab", "Burgery", "Pierogi", "Sushi", "Makarony", "Sałatki", "Ramen", "Pizza", "Alkohole");
     }
 
     public void countPromotionAverageNote(Promotion promotion) {
@@ -142,14 +142,14 @@ public class PromotionService {
         List<Promotion> alkohole = new ArrayList<>();
 
         for (Promotion p : promotions) {
-            if (p.getCategory().equals("Dania wegetarianskie")) {
+            if (p.getCategory().equals("Dania wegetariańskie")) {
                 wegetarianskie.add(p);
             }
         }
         model.addAttribute("wegetarianskie", wegetarianskie);
 
         for (Promotion p : promotions) {
-            if (p.getCategory().equals("Chinszczyzna")) {
+            if (p.getCategory().equals("Chińszczyzna")) {
                 chinszczyzna.add(p);
             }
         }
@@ -163,7 +163,7 @@ public class PromotionService {
         model.addAttribute("owoceMorza", owoceMorza);
 
         for (Promotion p : promotions) {
-            if (p.getCategory().equals("Nalesniki")) {
+            if (p.getCategory().equals("Naleśniki")) {
                 nalesniki.add(p);
             }
         }
@@ -212,7 +212,7 @@ public class PromotionService {
         model.addAttribute("makarony", makarony);
 
         for (Promotion p : promotions) {
-            if (p.getCategory().equals("Salatki")) {
+            if (p.getCategory().equals("Sałatki")) {
                 salatki.add(p);
             }
         }

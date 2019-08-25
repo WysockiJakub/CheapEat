@@ -1,12 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%
-    response.setCharacterEncoding("UTF-8");
-    request.setCharacterEncoding("UTF-8");
-%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +49,6 @@
 
                 <%@ include file="../fragments/restaurantHeader.jsp" %>
 
-
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="/user/restaurant/${restaurant.id}/info">Opis</a>
@@ -60,14 +56,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/restaurant/${restaurant.id}/promotions">Promocje</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Recenzje</a>
-                    </li>
                 </ul>
 
                 <div class="row">
 
-                    <div class="col-lg-6">
+                    <div class="col-sm">
 
                         <!-- Basic Card Example -->
                         <div class="card shadow mb-4">
@@ -75,37 +68,51 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Opis</h6>
                             </div>
                             <div class="card-body">
-                                <strong>Kategoria: </strong>${promotion.category}<br/><br/>
-                                <strong>Dzień promocji: </strong>${promotion.dayOfWeek}<br/><br/>
-                                ${promotion.description}
+                                ${restaurant.info}
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-sm">
 
-                        <!-- Collapsable Card Example -->
+                        <!-- Basic Card Example -->
                         <div class="card shadow mb-4">
-                            <!-- Card Header - Accordion -->
-                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">Restauracja</h6>
-                            </a>
-                            <!-- Card Content - Collapse -->
-                            <div class="collapse show" id="collapseCardExample">
-                                <div class="card-body">
-                                    <strong>Email: </strong> to see the card body collapse and expand!
-                                </div>
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Kontakt</h6>
+                            </div>
+                            <div class="card-body">
+                                <strong>Miasto: </strong>${restaurant.city}, ${restaurant.zipCode}<br/><br/>
+                                <strong>Ulica: </strong>${restaurant.street} ${restaurant.houseNumber}<br/><br/>
+                                <strong>Numer telefonu: </strong>${restaurant.phoneNumber}<br/><br/>
+                                <strong>Email: </strong>${restaurant.email}<br/><br/>
+                                <strong>Strona internetowa: </strong><a href="${restaurant.website}">${restaurant.website}</a><br/><br/>
                             </div>
                         </div>
 
                     </div>
+
+                    <div class="col-sm">
+
+                        <!-- Basic Card Example -->
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Lokalizacja</h6>
+                            </div>
+                            <div>
+                                <iframe width="400" height="275" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${restaurant.localizationUrl}"></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
             <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
 
         <!-- Footer -->
         <%@ include file="../fragments/footer.jsp" %>

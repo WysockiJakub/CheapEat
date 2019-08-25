@@ -24,28 +24,21 @@ public class Restaurant {
     @Size(max = 500)
     private String info;
 
-    @NotBlank
     @Size(max = 20)
     private String city;
 
-    @NotBlank
     private String street;
 
-    @NotBlank
     @Size(max = 4)
     private String houseNumber;
 
-    @NotBlank
     private String zipCode;
 
-    @NotBlank
     private String website;
 
-    @NotBlank
     @Size(max=15)
     private String phoneNumber;
 
-    @NotBlank
     @Email
     private String email;
 

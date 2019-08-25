@@ -53,12 +53,6 @@ public class RestaurateurController {
         return Arrays.asList(DayOfWeek.of(1), DayOfWeek.of(2), DayOfWeek.of(3), DayOfWeek.of(4), DayOfWeek.of(5), DayOfWeek.of(6), DayOfWeek.of(7));
     }
 
-//    @ModelAttribute(name = "loggedUserRestaurant")
-//    Restaurant restaurant() {
-//        Long restaurantId = UserUtilities.getLoggedUser(userRepository).getRestaurant().getId();
-//        Restaurant restaurant = restaurantRepository.findById(restaurantId);
-//        return ;
-//    }
 
     @GetMapping("/dashboard")
     public String restaurateurDashboard(Model model, HttpSession session) {
@@ -84,7 +78,18 @@ public class RestaurateurController {
     @GetMapping("/restaurant/profil")
     public String showRestaurantProfile(Model model) {
         Restaurant restaurant = restaurantRepository.findByUserId(UserUtilities.getLoggedUser(userRepository).getId());
+        restaurantService.countAvgRestaurantNote(restaurant);
         model.addAttribute("restaurant", restaurant);
+
+        List<Promotion> promotions = restaurant.getPromotions();
+        model.addAttribute("promotions", promotions);
+
+        int subscriptions = promotionService.countPromotionSubscriptionsForRestaurant(promotions);
+        model.addAttribute("subscriptions", subscriptions);
+
+        int allReviews = reviewService.countRestaurantAllReviews(promotions);
+        model.addAttribute("allReviews", allReviews);
+
         return "restaurateur/restaurantProfile";
     }
 
@@ -133,19 +138,32 @@ public class RestaurateurController {
     //----------------WYSWIETLANIE PROMOCJI-------------------
 
 
-    @GetMapping("/promotion/{id}")
-    public String checkPromotion(@PathVariable Long id, Model model) {
+    @GetMapping("/promotion/{id}/info")
+    public String checkPromotionInfo(@PathVariable Long id, Model model) {
         if (UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions().contains(promotionRepository.getFirstById(id))) {
             Promotion promotion = promotionRepository.getFirstById(id);
             promotionService.countPromotionAverageNote(promotion);
             model.addAttribute("promotion", promotion);
-            return "restaurateur/showPromotion";
+            return "restaurateur/promotionInfo";
         } else {
             return "404";
         }
     }
 
-        //--------------EDYCJA PROMOCJI--------
+    @GetMapping("/promotion/{id}/reviews")
+    public String checkPromotionReviews(@PathVariable Long id, Model model) {
+        if (UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions().contains(promotionRepository.getFirstById(id))) {
+            Promotion promotion = promotionRepository.getFirstById(id);
+            promotionService.countPromotionAverageNote(promotion);                                                            //przeliczenie średniej oceny promocji
+            promotionService.countPromotionSubscription(promotion);                                                           //przeliczenie liczby subskrypcji promocji
+            model.addAttribute("promotion", promotion);
+            return "restaurateur/promotionReviews";
+        } else {
+            return "404";
+        }
+    }
+
+    //-----------------EDYCJA PROMOCJI-------------------
 
     @GetMapping("/promotion/edit/{id}")
     public String showPromotion(@PathVariable Long id, Model model) {
@@ -170,11 +188,11 @@ public class RestaurateurController {
         promotion.setCategory(request.getCategory());
         promotion.setDayOfWeek(request.getDayOfWeek());
         promotionRepository.save(promotion);
-        return "redirect:/restaurateur/promotion/" + promotionId;
+        return "redirect:/restaurateur/promotion/" + promotionId + "/info";
     }
 
 
-    //----------DODANIE NOWEJ PROMOCJI-------------------
+    //--------------DODANIE NOWEJ PROMOCJI-------------------
 
     @GetMapping("/promotion/add")
     public String addPromotion(Model model) {
@@ -195,53 +213,21 @@ public class RestaurateurController {
         promotion.setRestaurant(restaurant);
         promotionRepository.save(promotion);
 
-        return "redirect:/restaurateur/promotion/list"; }
-
-    //------------STATYSTYKI--------------------
-
-//    @GetMapping("/stats")
-//    public String showStats(Model model) {
-//        List<Promotion> promotions = UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions();
-//        double avgNoteOfAllPromotions = 0;
-//        if (!promotions.isEmpty()){
-//            for (Promotion p : promotions) {
-//                avgNoteOfAllPromotions += p.getAverageNote();
-//            }
-//        }
-//        model.addAttribute("avgNote", Utils.round(avgNoteOfAllPromotions/promotions.size(),2));
-//        model.addAttribute("numberOfPromotions", promotions.size());
-//
-//
-//
-//
-//
-//    }
+        return "redirect:/restaurateur/promotion/list";
+    }
 
 
+    //---------------USUWANIE PROMOCJI--------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @GetMapping("/promotion/delete/{promotionId}")
+    public String deletePromotion(@PathVariable Long promotionId) {
+        if (UserUtilities.getLoggedUser(userRepository).getRestaurant().getPromotions().contains(promotionRepository.getFirstById(promotionId))) {
+            promotionRepository.deletePromotion(promotionId);
+            return "redirect:/restaurateur/promotion/list";
+        } else {
+            return "404";
+        }
+    }
 
 
 

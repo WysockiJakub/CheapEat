@@ -89,7 +89,7 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Użytkownicy</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${allPromotions}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${allUsers}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-child fa-2x text-gray-300"></i>
@@ -119,125 +119,63 @@
 
                 <!-- Content Row -->
 
-                <div id="carouselExampleIndicators" class="carousel slide html-editor-align-center" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="9"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 html-editor-align-center">
-                                    <a href="/user/promotion/${firstTodayPromotion.id}/info" class="m-0 font-weight-bold text-primary text-center">${firstTodayPromotion.name}</a>
-                                </div>
-                                <div class="card-body">
-                                    ${firstTodayPromotion.description}
-                                </div>
-                            </div>
-                        </div>
-                        <c:forEach var="promotion" items="${todayPromotions}">
-                            <div class="carousel-item">
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <a href="/user/promotion/${promotion.id}/info" class="m-0 font-weight-bold text-primary text-center">${promotion.name}</a>
-                                    </div>
-                                    <div class="card-body">
-                                            ${promotion.description}
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-
                 <div class="row">
 
-                    <!-- Area Chart -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="col">
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </div>
+
+
+                    <div id="carouselExampleIndicators" class="col-6 carousel slide html-editor-align-center col mr-2" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="9"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3 text-center">
+                                        <a href="/user/promotion/${firstTodayPromotion.id}/info" class="m-0 font-weight-bold text-primary">${firstTodayPromotion.name}</a>
+                                    </div>
+                                    <div class="card-body">
+                                        ${firstTodayPromotion.description}
                                     </div>
                                 </div>
                             </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                            <c:forEach var="promotion" items="${todayPromotions}">
+                                <div class="carousel-item">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3 text-center">
+                                            <a href="/user/promotion/${promotion.id}/info" class="m-0 font-weight-bold text-primary span12 ">${promotion.name}</a>
+                                        </div>
+                                        <div class="card-body">
+                                                ${promotion.description}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
 
-                    <!-- Pie Chart -->
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col">
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon black" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
 
         </div>
         <!-- End of Main Content -->

@@ -43,10 +43,9 @@ public class Promotion {
     @Transient
     private int subscription;
 
-    @NotBlank
     private DayOfWeek dayOfWeek;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.DETACH})
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 

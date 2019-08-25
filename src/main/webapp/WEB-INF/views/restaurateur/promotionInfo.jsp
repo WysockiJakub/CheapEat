@@ -24,7 +24,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <%@ include file="../fragments/sidebarUser.jsp" %>
+    <%@ include file="../fragments/sidebarRestaurateur.jsp" %>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -32,34 +32,12 @@
         <!-- Main Content -->
         <div id="content">
 
-            <%@ include file="../fragments/topbarUser.jsp" %>
+            <%@ include file="../fragments/topbarRestaurateur.jsp" %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="row">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <c:choose>
-                            <c:when test="${!favourite}">
-                                <a href="/user/promotion/addToFavourite/${promotion.id}" class="btn btn-success btn-icon-split">
-                                    <span class="icon text-white-50">
-                                      <i class="fas fa-check"></i>
-                                    </span>
-                                    <span class="text">Dodaj do ulubionych</span>
-                                </a>
-                            </c:when>
-                            <C:otherwise>
-                                <a href="/user/promotion/deleteFromFavourite/${promotion.id}" class="btn btn-danger btn-icon-split">
-                                    <span class="icon text-white-50">
-                                      <i class="fas fa-trash"></i>
-                                    </span>
-                                    <span class="text">Usuń z ulubionych</span>
-                                </a>
-                            </C:otherwise>
-                        </c:choose>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -71,10 +49,10 @@
 
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/user/promotion/${promotion.id}/info">Opis</a>
+                        <a class="nav-link active" href="/restaurateur/promotion/${promotion.id}/info">Opis</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/promotion/${promotion.id}/reviews">Recenzje</a>
+                        <a class="nav-link" href="/restaurateur/promotion/${promotion.id}/reviews">Recenzje</a>
                     </li>
                 </ul>
 
@@ -88,6 +66,8 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Opis</h6>
                             </div>
                             <div class="card-body">
+                                <strong>Kategoria: </strong>${promotion.category}<br/><br/>
+                                <strong>Dzień promocji: </strong>${promotion.dayOfWeek}<br/><br/>
                                 ${promotion.description}
                             </div>
                         </div>
@@ -100,13 +80,12 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
                             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">Informacje</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Restauracja</h6>
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <strong>Kategoria: </strong>${promotion.category}<br/><br/>
-                                    <strong>Dzień promocji: </strong>${promotion.dayOfWeek}<br/><br/>
+                                    <strong>Email: </strong> to see the card body collapse and expand!
                                 </div>
                             </div>
                         </div>
