@@ -170,8 +170,8 @@
 
                     <div class="col">
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon black" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only" style="color: darkgrey;">Next</span>
                         </a>
                     </div>
                 </div>

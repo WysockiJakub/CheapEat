@@ -45,6 +45,7 @@ public class Restaurant {
     @Transient
     private double avgNote;
 
+    @Size(max = 500)
     private String localizationUrl;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
