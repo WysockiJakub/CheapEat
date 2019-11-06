@@ -94,7 +94,8 @@ public class PromotionController {
         User user = UserUtilities.getLoggedUser(userRepository);
         List<Promotion> userFavouritePromotions = user.getFavouritesPromotions();
         model.addAttribute("list", userFavouritePromotions);
-        model.addAttribute("header", "Wszystkie ulubione promocje");
+        String header = "Wszystkie ulubione promocje";
+        model.addAttribute("header", header);
         return "user/favouritePromotions";
     }
 

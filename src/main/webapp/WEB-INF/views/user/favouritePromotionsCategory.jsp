@@ -65,16 +65,8 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach var="promotion" items="${wegetarianskie}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                <c:forEach var="promotion" items="${list}">
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -109,15 +101,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${chinszczyzna}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -152,15 +136,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${owoceMorza}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -195,15 +171,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${nalesniki}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -238,15 +206,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${obiadyDomowe}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -281,15 +241,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${kebab}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -324,15 +276,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${burgery}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -367,15 +311,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${pierogi}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -410,15 +346,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${sushi}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -453,15 +381,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${makarony}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -496,15 +416,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${salatki}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -539,15 +451,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${ramen}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -582,15 +486,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${pizza}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
@@ -625,15 +521,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <c:forEach var="promotion" items="${alkohole}">
-                                                    <tr>
-                                                        <td>${promotion.name}</td>
-                                                        <td>${promotion.price}</td>
-                                                        <td>${promotion.dayOfWeek}</td>
-                                                        <td>${promotion.restaurant.name}</td>
-                                                        <td>
-                                                            <a href="/user/promotion/${promotion.id}/info">Zobacz</a>
-                                                        </td>
-                                                    </tr>
+                                                    <%@ include file="../fragments/promotionListTable.jsp" %>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
